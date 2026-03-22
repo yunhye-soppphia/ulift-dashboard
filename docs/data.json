@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "updatedAt": "2026-03-22T08:52:42.027Z",
+    "from": "2026-03-15",
+    "to": "2026-03-21",
+    "fetchDays": 7
+  },
+  "cohort": {
+    "trial": {
+      "count": 8,
+      "medianTime": 8507000,
+      "meanTime": 28293000,
+      "couponRate": 100,
+      "couponCount": 8,
+      "avgVisits": 816.4,
+      "topPages": [
+        {
+          "page": "$mp_web_page_view",
+          "count": 6263
+        },
+        {
+          "page": "home",
+          "count": 212
+        },
+        {
+          "page": "course_list",
+          "count": 40
+        },
+        {
+          "page": "offering",
+          "count": 12
+        },
+        {
+          "page": "freetrial",
+          "count": 4
+        }
+      ]
+    },
+    "direct": {
+      "count": 56,
+      "medianTime": 2022000,
+      "meanTime": 10384615,
+      "couponRate": 73.2,
+      "couponCount": 41,
+      "avgVisits": 196.7,
+      "topPages": [
+        {
+          "page": "$mp_web_page_view",
+          "count": 8723
+        },
+        {
+          "page": "home",
+          "count": 1294
+        },
+        {
+          "page": "course_list",
+          "count": 640
+        },
+        {
+          "page": "offering",
+          "count": 242
+        },
+        {
+          "page": "freetrial",
+          "count": 118
+        }
+      ]
+    },
+    "conversionRate": {
+      "trialToPurchase": 4.9,
+      "allTrialUsers": 164
+    },
+    "totalBuyers": 64
+  },
+  "dau": null
+}

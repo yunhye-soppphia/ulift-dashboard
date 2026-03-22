@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ULIFT · Cohort Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #f5f3ef;
+  --surface:  #ffffff;
+  --ink:      #1a1814;
+  --ink2:     #6b6760;
+  --ink3:     #b0aba4;
+  --border:   #e4e0d8;
+  --trial:    #2d5be3;
+  --direct:   #e36b2d;
+  --trial-bg: #eef2fd;
+  --direct-bg:#fdf3ee;
+  --green:    #1a7a4a;
+  --green-bg: #e8f7ef;
+  --mono:     'DM Mono', monospace;
+  --serif:    'Instrument Serif', serif;
+  --sans:     'Pretendard', -apple-system, sans-serif;
+  --r:        8px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);}
+
+/* ── LAYOUT ── */
+.shell{max-width:1200px;margin:0 auto;padding:40px 28px 80px;}
+section{margin-bottom:36px;}
+
+/* ── HEADER ── */
+.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.header-left{}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--ink3);text-transform:uppercase;margin-bottom:6px;}
+.page-title{font-family:var(--serif);font-size:36px;font-style:italic;line-height:1.1;letter-spacing:-0.5px;}
+.page-title em{font-style:normal;color:var(--trial);}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.date-range-btns{display:flex;gap:4px;}
+.dr-btn{font-family:var(--mono);font-size:11px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;transition:all .15s;}
+.dr-btn.active,.dr-btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.status-row{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--ink3);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite;}
+.dot.error{background:#e32d2d;animation:none;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:24px;align-items:center;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);}
+.leg-dot{width:10px;height:10px;border-radius:50%;}
+
+/* ── SUMMARY CARDS ── */
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
+.s-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;position:relative;overflow:hidden;}
+.s-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,var(--border));}
+.s-card.t{--c:var(--trial);}
+.s-card.d{--c:var(--direct);}
+.s-card.g{--c:var(--green);}
+.s-label{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;}
+.s-val{font-family:var(--serif);font-size:32px;font-style:italic;line-height:1;}
+.s-sub{font-size:11px;color:var(--ink3);margin-top:6px;font-family:var(--mono);}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;margin-top:8px;}
+.badge.better{background:var(--green-bg);color:var(--green);}
+.badge.worse{background:#fdeaea;color:#c0392b;}
+
+/* ── SECTION TITLE ── */
+.sec-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.sec-tag{font-family:var(--mono);font-size:10px;color:var(--ink3);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:3px;margin-left:4px;}
+
+/* ── COMPARISON PANEL ── */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.c-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;}
+.c-panel.trial-panel{border-top:3px solid var(--trial);}
+.c-panel.direct-panel{border-top:3px solid var(--direct);}
+.c-panel-title{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
+.c-panel.trial-panel .c-panel-title{color:var(--trial);}
+.c-panel.direct-panel .c-panel-title{color:var(--direct);}
+
+/* ── STAT ROWS ── */
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--border);}
+.stat-row:last-child{border-bottom:none;}
+.stat-name{font-size:12px;color:var(--ink2);}
+.stat-val{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink);}
+
+/* ── BAR COMPARE ── */
+.bar-compare{display:flex;flex-direction:column;gap:14px;}
+.bc-row{display:flex;flex-direction:column;gap:5px;}
+.bc-label{display:flex;justify-content:space-between;font-size:12px;}
+.bc-name{color:var(--ink2);}
+.bc-vals{display:flex;gap:12px;}
+.bc-val{font-family:var(--mono);font-size:11px;}
+.bc-val.t{color:var(--trial);}
+.bc-val.d{color:var(--direct);}
+.bc-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden;position:relative;}
+.bc-fill{height:100%;border-radius:3px;position:absolute;top:0;left:0;transition:width .7s cubic-bezier(.23,1,.32,1);}
+.bc-fill.t{background:var(--trial);opacity:.8;}
+.bc-fill.d{background:var(--direct);opacity:.8;margin-top:0;}
+.bc-tracks{display:flex;flex-direction:column;gap:3px;}
+
+/* ── TIME DISTRIBUTION ── */
+.time-chart{width:100%;overflow:visible;}
+
+/* ── PAGE FLOW ── */
+.page-flow{display:flex;flex-direction:column;gap:6px;}
+.pf-row{display:flex;align-items:center;gap:10px;}
+.pf-rank{font-family:var(--mono);font-size:10px;color:var(--ink3);width:18px;text-align:right;flex-shrink:0;}
+.pf-name{font-size:12px;color:var(--ink);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pf-bar-wrap{width:100px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0;}
+.pf-bar{height:100%;border-radius:3px;transition:width .6s ease;}
+.pf-cnt{font-family:var(--mono);font-size:10px;color:var(--ink3);width:30px;text-align:right;flex-shrink:0;}
+
+/* ── INSIGHT BOX ── */
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ins-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
+.ins-icon{font-size:22px;margin-bottom:10px;}
+.ins-title{font-size:13px;font-weight:600;margin-bottom:6px;}
+.ins-body{font-size:12px;color:var(--ink2);line-height:1.6;}
+.ins-body strong{color:var(--ink);}
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,var(--border) 25%,#ece9e3 50%,var(--border) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;}
+@keyframes shim{to{background-position:-200% 0;}}
+
+/* ── LOADING OVERLAY ── */
+.loading-overlay{position:fixed;inset:0;background:rgba(245,243,239,.85);backdrop-filter:blur(4px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:100;transition:opacity .3s;}
+.loading-overlay.hidden{opacity:0;pointer-events:none;}
+.loading-spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--trial);border-radius:50%;animation:spin .8s linear infinite;}
+.loading-text{font-family:var(--mono);font-size:12px;color:var(--ink2);}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── ANIM ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp .4s ease both;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .summary-grid{grid-template-columns:repeat(2,1fr);}
+  .compare-grid,.insight-grid{grid-template-columns:1fr;}
+}
+@media(max-width:520px){.summary-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text" id="loadingText">Mixpanel 데이터 불러오는 중…</div>
+</div>
+
+<div class="shell">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="eyebrow">ULIFT · Cohort Analysis</div>
+      <h1 class="page-title">셀 체험 vs<br><em>바로 구매</em></h1>
+    </div>
+    <div class="header-right">
+      <div class="date-range-btns">
+        <button class="dr-btn" onclick="load()">7일</button>
+        <button class="dr-btn active" onclick="load()" id="btn30">30일</button>
+        <button class="dr-btn" onclick="load()">90일</button>
+      </div>
+      <div class="status-row">
+        <div class="dot" id="statusDot"></div>
+        <span id="statusText">연결 중…</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--trial)"></div>셀 체험 후 구매</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--direct)"></div>바로 구매</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <section>
+    <div class="summary-grid" id="summaryGrid">
+      <div class="s-card t"><div class="s-label">셀 체험 후 구매</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
+      <div class="s-card d"><div class="s-label">바로 구매</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
+      <div class="s-card g"><div class="s-label">셀→구매 전환율</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
+      <div class="s-card" style="--c:#888"><div class="s-label">총 구매자</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
+    </div>
+  </section>
+
+  <!-- TIME TO PURCHASE -->
+  <section>
+    <div class="sec-title">구매까지 걸린 시간<span class="sec-tag">TIME TO PURCHASE</span></div>
+    <div class="compare-grid">
+      <div class="c-panel trial-panel">
+        <div class="c-panel-title">셀 체험 후 구매 그룹</div>
+        <div id="trial-time-stats"></div>
+      </div>
+      <div class="c-panel direct-panel">
+        <div class="c-panel-title">바로 구매 그룹</div>
+        <div id="direct-time-stats"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUPON & VISIT -->
+  <section>
+    <div class="sec-title">쿠폰 사용률 · 방문 패턴<span class="sec-tag">ENGAGEMENT</span></div>
+    <div class="c-panel" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
+      <div class="bar-compare" id="barCompare"></div>
+    </div>
+  </section>
+
+  <!-- PAGE FLOW -->
+  <section>
+    <div class="sec-title">구매 전 주요 방문 페이지<span class="sec-tag">PAGE PATTERN</span></div>
+    <div class="compare-grid">
+      <div class="c-panel trial-panel">
+        <div class="c-panel-title">셀 체험 후 구매 그룹</div>
+        <div class="page-flow" id="trial-pages"></div>
+      </div>
+      <div class="c-panel direct-panel">
+        <div class="c-panel-title">바로 구매 그룹</div>
+        <div class="page-flow" id="direct-pages"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PM INSIGHTS -->
+  <section>
+    <div class="sec-title">에듀테크 PM 인사이트<span class="sec-tag">RECOMMENDED METRICS</span></div>
+    <div class="insight-grid" id="insightGrid"></div>
+  </section>
+
+</div><!-- /shell -->
+
+<script>
+// ── data.json URL — GitHub Pages에서 같은 경로에 위치
+const DATA_URL = './data.json';
+let currentData = null;
+
+const fmt    = n => n == null ? '—' : Number(n).toLocaleString('ko-KR');
+const fmtPct = n => n == null ? '—' : n.toFixed(1) + '%';
+const fmtMs  = ms => {
+  if (ms == null) return '—';
+  const h = ms / 3600000;
+  if (h < 1)   return Math.round(ms / 60000) + '분';
+  if (h < 24)  return Math.round(h) + '시간';
+  return (h / 24).toFixed(1) + '일';
+};
+
+function setStatus(ok, msg) {
+  document.getElementById('statusDot').className = 'dot' + (ok ? '' : ' error');
+  document.getElementById('statusText').textContent = msg;
+}
+function showLoading(msg='데이터 불러오는 중…') {
+  document.getElementById('loadingText').textContent = msg;
+  document.getElementById('loadingOverlay').classList.remove('hidden');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.add('hidden');
+}
+
+function renderSummary(d) {
+  document.getElementById('summaryGrid').innerHTML = `
+    <div class="s-card t fade-up" style="animation-delay:.05s">
+      <div class="s-label">셀 체험 후 구매</div>
+      <div class="s-val">${fmt(d.trial.count)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
+      <div class="s-sub">전체 구매자의 ${fmtPct(d.trial.count / (d.totalBuyers||1) * 100)}</div>
+    </div>
+    <div class="s-card d fade-up" style="animation-delay:.10s">
+      <div class="s-label">바로 구매</div>
+      <div class="s-val">${fmt(d.direct.count)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
+      <div class="s-sub">전체 구매자의 ${fmtPct(d.direct.count / (d.totalBuyers||1) * 100)}</div>
+    </div>
+    <div class="s-card g fade-up" style="animation-delay:.15s">
+      <div class="s-label">셀→구매 전환율</div>
+      <div class="s-val">${fmtPct(d.conversionRate.trialToPurchase)}</div>
+      <div class="s-sub">셀 체험자 ${fmt(d.conversionRate.allTrialUsers)}명 중</div>
+    </div>
+    <div class="s-card fade-up" style="--c:#888;animation-delay:.20s">
+      <div class="s-label">총 구매자 (기간 내)</div>
+      <div class="s-val">${fmt(d.totalBuyers)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
+      <div class="s-sub">${d.from} ~ ${d.to}</div>
+    </div>
+  `;
+}
+
+function renderTimePanel(elId, stat, color) {
+  const el = document.getElementById(elId);
+  if (!stat.medianTime) {
+    el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:12px;padding:12px 0">데이터 부족</div>';
+    return;
+  }
+  el.innerHTML = `
+    <div class="stat-row"><span class="stat-name">중앙값 (Median)</span><span class="stat-val" style="color:${color}">${fmtMs(stat.medianTime)}</span></div>
+    <div class="stat-row"><span class="stat-name">평균</span><span class="stat-val">${fmtMs(stat.meanTime)}</span></div>
+    <div class="stat-row"><span class="stat-name">평균 방문 횟수</span><span class="stat-val">${stat.avgVisits}회</span></div>
+  `;
+}
+
+function renderBarCompare(d) {
+  const items = [
+    { name:'쿠폰 사용률', tVal:fmtPct(d.trial.couponRate), dVal:fmtPct(d.direct.couponRate), tPct:d.trial.couponRate, dPct:d.direct.couponRate },
+    { name:'평균 방문 횟수', tVal:d.trial.avgVisits+'회', dVal:d.direct.avgVisits+'회',
+      tPct:Math.min(100,d.trial.avgVisits/Math.max(d.trial.avgVisits,d.direct.avgVisits,1)*100),
+      dPct:Math.min(100,d.direct.avgVisits/Math.max(d.trial.avgVisits,d.direct.avgVisits,1)*100) },
+  ];
+  document.getElementById('barCompare').innerHTML = items.map(i => `
+    <div class="bc-row">
+      <div class="bc-label"><span class="bc-name">${i.name}</span><div class="bc-vals"><span class="bc-val t">● ${i.tVal}</span><span class="bc-val d">● ${i.dVal}</span></div></div>
+      <div class="bc-tracks">
+        <div class="bc-track"><div class="bc-fill t" style="width:${i.tPct}%"></div></div>
+        <div class="bc-track"><div class="bc-fill d" style="width:${i.dPct}%"></div></div>
+      </div>
+    </div>`).join('');
+}
+
+function renderPages(elId, pages, color) {
+  const el = document.getElementById(elId);
+  const max = pages[0]?.count || 1;
+  const cleanName = p => {
+    if (!p) return '(알 수 없음)';
+    const map = {'/':'홈','/freetrial':'무료체험','/offering':'상품 페이지','/course_list':'코스 목록','/signin':'로그인','/profile':'프로필','/review':'리뷰'};
+    const key = Object.keys(map).find(k => p.includes(k));
+    return key ? map[key] : p.split('/').filter(Boolean).pop() || p;
+  };
+  if (!pages.length) { el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:12px">데이터 없음</div>'; return; }
+  el.innerHTML = pages.map((pg,i) => `
+    <div class="pf-row">
+      <span class="pf-rank">${i+1}</span>
+      <span class="pf-name">${cleanName(pg.page)}</span>
+      <div class="pf-bar-wrap"><div class="pf-bar" style="width:${(pg.count/max*100).toFixed(0)}%;background:${color};opacity:.7"></div></div>
+      <span class="pf-cnt">${fmt(pg.count)}</span>
+    </div>`).join('');
+}
+
+function renderInsights(d) {
+  const t = d.trial, dir = d.direct;
+  const timeDiff   = t.medianTime && dir.medianTime ? ((dir.medianTime-t.medianTime)/dir.medianTime*100).toFixed(0) : null;
+  const couponDiff = (t.couponRate - dir.couponRate).toFixed(1);
+  const visitDiff  = (t.avgVisits  - dir.avgVisits).toFixed(1);
+  const cards = [
+    { icon:'⏱️', title:'구매 결정 속도',
+      body: timeDiff != null ? `셀 체험 그룹은 바로구매 그룹보다 구매 결정이 <strong>${Math.abs(timeDiff)}% ${+timeDiff>0?'빠릅니다':'느립니다'}</strong>. ${+timeDiff>0?'체험이 구매 확신을 높이는 효과가 있습니다.':'체험 후에도 추가 탐색이 필요함을 의미합니다.'}` : '데이터가 충분히 쌓이면 분석됩니다.' },
+    { icon:'🎟️', title:'쿠폰 의존도',
+      body:`셀 체험 그룹 쿠폰 사용률 <strong>${fmtPct(t.couponRate)}</strong> vs 바로구매 <strong>${fmtPct(dir.couponRate)}</strong>. ${+couponDiff>2?'체험 그룹이 쿠폰에 더 의존합니다 — A/B 테스트 권장.':'두 그룹의 쿠폰 의존도가 유사합니다.'}` },
+    { icon:'🔁', title:'재방문 행동',
+      body:`셀 체험 그룹 평균 <strong>${t.avgVisits}회</strong> 방문 vs 바로구매 <strong>${dir.avgVisits}회</strong>. ${+visitDiff>1?'체험 그룹이 더 많이 탐색 — 이탈을 줄이는 넛지가 효과적.':'방문 패턴 유사.'}` },
+    { icon:'🎯', title:'셀→구매 전환 최적화',
+      body:`현재 셀 체험자의 구매 전환율 <strong>${fmtPct(d.conversionRate.trialToPurchase)}</strong>. 체험 완료 직후 <strong>할인 오퍼</strong>나 <strong>진도 리포트</strong> 제공이 전환율 향상에 효과적입니다.` },
+    { icon:'📍', title:'핵심 이탈 구간',
+      body:'<strong>상품 페이지 → 결제 단계</strong> 사이의 마찰 제거가 전환율에 가장 직접적 영향을 미칩니다.' },
+    { icon:'📈', title:'에듀테크 업계 벤치마크',
+      body:'에듀테크 무료체험 → 유료 전환율 업계 평균 <strong>15~25%</strong>. <strong>첫 학습 완료(AHA moment)</strong> 달성 여부가 전환율의 핵심 예측 변수입니다.' },
+  ];
+  document.getElementById('insightGrid').innerHTML = cards.map((c,i) => `
+    <div class="ins-card fade-up" style="animation-delay:${.05*i}s">
+      <div class="ins-icon">${c.icon}</div>
+      <div class="ins-title">${c.title}</div>
+      <div class="ins-body">${c.body}</div>
+    </div>`).join('');
+}
+
+function render(raw) {
+  const d = raw.cohort ? { ...raw.cohort, from:raw.meta?.from, to:raw.meta?.to } : raw;
+  currentData = d;
+  renderSummary(d);
+  renderTimePanel('trial-time-stats',  d.trial,  'var(--trial)');
+  renderTimePanel('direct-time-stats', d.direct, 'var(--direct)');
+  renderBarCompare(d);
+  renderPages('trial-pages',  d.trial.topPages,  'var(--trial)');
+  renderPages('direct-pages', d.direct.topPages, 'var(--direct)');
+  renderInsights(d);
+}
+
+async function load() {
+  showLoading('data.json 불러오는 중…');
+  setStatus(true, '로딩 중…');
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    render(data);
+    const updated = data.meta?.updatedAt ? new Date(data.meta.updatedAt).toLocaleString('ko-KR') : new Date().toLocaleString('ko-KR');
+    setStatus(true, '갱신: ' + updated);
+  } catch(e) {
+    console.error(e);
+    setStatus(false, 'data.json 없음 — Mock 데이터 표시 중');
+    render({ cohort:{ trial:{count:142,medianTime:172800000,meanTime:216000000,couponRate:38.7,couponCount:55,avgVisits:7.2,topPages:[{page:'/freetrial',count:142},{page:'/offering',count:118},{page:'/',count:97},{page:'/course_list',count:84},{page:'/review',count:61}]}, direct:{count:89,medianTime:345600000,meanTime:432000000,couponRate:52.8,couponCount:47,avgVisits:4.1,topPages:[{page:'/',count:89},{page:'/offering',count:76},{page:'/signin',count:54},{page:'/review',count:43},{page:'/course_list',count:38}]}, conversionRate:{trialToPurchase:18.4,allTrialUsers:771}, totalBuyers:231 }, meta:{from:'(mock)',to:'(mock)'} });
+  } finally {
+    hideLoading();
+  }
+}
+
+load();
+</script>
+</body>
+</html>

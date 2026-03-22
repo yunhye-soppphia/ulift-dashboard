@@ -1,0 +1,40 @@
+# .github/workflows/fetch.yml
+# 매일 오전 9시 (KST) 자동 실행 = UTC 00:00
+
+name: Daily Mixpanel Fetch
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 매일 UTC 00:00 = KST 09:00
+  workflow_dispatch:       # 수동 실행 가능 (Actions 탭에서 Run workflow 버튼)
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch & Analyze (30일치)
+        env:
+          MIXPANEL_USERNAME:   ${{ secrets.MIXPANEL_USERNAME }}
+          MIXPANEL_SECRET:     ${{ secrets.MIXPANEL_SECRET }}
+          MIXPANEL_PROJECT_ID: ${{ secrets.MIXPANEL_PROJECT_ID }}
+          FETCH_DAYS:          '30'
+        run: node scripts/fetch.js
+
+      - name: Commit data.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json
+          git diff --cached --quiet || git commit -m "data: daily update $(date -u '+%Y-%m-%d KST09:00')"
+          git push
