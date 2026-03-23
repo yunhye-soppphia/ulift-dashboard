@@ -3,397 +3,427 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ULIFT · Cohort Analysis</title>
+<title>CodingValley Analytics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --bg:       #f5f3ef;
-  --surface:  #ffffff;
-  --ink:      #1a1814;
-  --ink2:     #6b6760;
-  --ink3:     #b0aba4;
-  --border:   #e4e0d8;
-  --trial:    #2d5be3;
-  --direct:   #e36b2d;
-  --trial-bg: #eef2fd;
-  --direct-bg:#fdf3ee;
-  --green:    #1a7a4a;
-  --green-bg: #e8f7ef;
-  --mono:     'DM Mono', monospace;
-  --serif:    'Instrument Serif', serif;
-  --sans:     'Pretendard', -apple-system, sans-serif;
-  --r:        8px;
+:root{
+  --bg:#f8f9fb;
+  --surface:#ffffff;
+  --surface2:#f2f4f8;
+  --border:#e8eaef;
+  --border2:#d8dbe4;
+  --ink:#1c1e26;
+  --ink2:#5a5e72;
+  --ink3:#9ea3b8;
+  --blue:#3b6ef5;
+  --blue-light:#eef2ff;
+  --green:#18a058;
+  --green-light:#e8f7ef;
+  --orange:#e86830;
+  --orange-light:#fff2ec;
+  --red:#e03e3e;
+  --red-light:#fff0f0;
+  --yellow:#c98f00;
+  --yellow-light:#fffaeb;
+  --mono:'DM Mono',monospace;
+  --sans:'Pretendard',-apple-system,sans-serif;
+  --r:10px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);}
-
-/* ── LAYOUT ── */
-.shell{max-width:1200px;margin:0 auto;padding:40px 28px 80px;}
-section{margin-bottom:36px;}
+html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased;}
+.shell{max-width:1320px;margin:0 auto;padding:36px 32px 80px;}
 
 /* ── HEADER ── */
-.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);}
-.header-left{}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--ink3);text-transform:uppercase;margin-bottom:6px;}
-.page-title{font-family:var(--serif);font-size:36px;font-style:italic;line-height:1.1;letter-spacing:-0.5px;}
-.page-title em{font-style:normal;color:var(--trial);}
-.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-.date-range-btns{display:flex;gap:4px;}
-.dr-btn{font-family:var(--mono);font-size:11px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--ink2);cursor:pointer;transition:all .15s;}
-.dr-btn.active,.dr-btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);}
-.status-row{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--ink3);}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease infinite;}
-.dot.error{background:#e32d2d;animation:none;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
+.logo{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.3px;}
+.logo span{color:var(--blue);}
+.header-right{display:flex;align-items:center;gap:12px;}
+.schedule-badge{font-family:var(--mono);font-size:11px;color:var(--blue);background:var(--blue-light);border:1px solid #c7d5fc;padding:4px 12px;border-radius:100px;}
+.updated{font-family:var(--mono);font-size:11px;color:var(--ink3);}
+.status{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11px;color:var(--ink3);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2.5s ease infinite;}
+.dot.err{background:var(--red);animation:none;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
 
-/* ── LEGEND ── */
-.legend{display:flex;gap:24px;align-items:center;margin-bottom:20px;}
-.leg-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);}
-.leg-dot{width:10px;height:10px;border-radius:50%;}
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border);margin-bottom:28px;}
 
-/* ── SUMMARY CARDS ── */
-.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
-.s-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;position:relative;overflow:hidden;}
-.s-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,var(--border));}
-.s-card.t{--c:var(--trial);}
-.s-card.d{--c:var(--direct);}
-.s-card.g{--c:var(--green);}
-.s-label{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;}
-.s-val{font-family:var(--serif);font-size:32px;font-style:italic;line-height:1;}
-.s-sub{font-size:11px;color:var(--ink3);margin-top:6px;font-family:var(--mono);}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;margin-top:8px;}
-.badge.better{background:var(--green-bg);color:var(--green);}
-.badge.worse{background:#fdeaea;color:#c0392b;}
+/* ── SECTION ── */
+.sec{margin-bottom:28px;}
+.sec-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.sec-title{font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-0.1px;}
+.sec-tag{font-family:var(--mono);font-size:10px;color:var(--ink3);background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;}
 
-/* ── SECTION TITLE ── */
-.sec-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.sec-tag{font-family:var(--mono);font-size:10px;color:var(--ink3);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:3px;margin-left:4px;}
+/* ── GRIDS ── */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 
-/* ── COMPARISON PANEL ── */
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.c-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;}
-.c-panel.trial-panel{border-top:3px solid var(--trial);}
-.c-panel.direct-panel{border-top:3px solid var(--direct);}
-.c-panel-title{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;}
-.c-panel.trial-panel .c-panel-title{color:var(--trial);}
-.c-panel.direct-panel .c-panel-title{color:var(--direct);}
+/* ── CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);}
 
-/* ── STAT ROWS ── */
-.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--border);}
-.stat-row:last-child{border-bottom:none;}
-.stat-name{font-size:12px;color:var(--ink2);}
-.stat-val{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink);}
+/* ── KPI CARD ── */
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);border-top:3px solid var(--kpi-color,var(--border2));}
+.kpi-label{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;}
+.kpi-val{font-size:34px;font-weight:700;letter-spacing:-1.5px;line-height:1;color:var(--ink);}
+.kpi-sub{font-size:12px;color:var(--ink3);margin-top:7px;}
+.kpi-delta{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:100px;margin-top:6px;}
+.kpi-delta.up{background:var(--green-light);color:var(--green);}
+.kpi-delta.dn{background:var(--red-light);color:var(--red);}
 
-/* ── BAR COMPARE ── */
-.bar-compare{display:flex;flex-direction:column;gap:14px;}
-.bc-row{display:flex;flex-direction:column;gap:5px;}
-.bc-label{display:flex;justify-content:space-between;font-size:12px;}
-.bc-name{color:var(--ink2);}
-.bc-vals{display:flex;gap:12px;}
-.bc-val{font-family:var(--mono);font-size:11px;}
-.bc-val.t{color:var(--trial);}
-.bc-val.d{color:var(--direct);}
-.bc-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden;position:relative;}
-.bc-fill{height:100%;border-radius:3px;position:absolute;top:0;left:0;transition:width .7s cubic-bezier(.23,1,.32,1);}
-.bc-fill.t{background:var(--trial);opacity:.8;}
-.bc-fill.d{background:var(--direct);opacity:.8;margin-top:0;}
-.bc-tracks{display:flex;flex-direction:column;gap:3px;}
+/* ── DAU CHART ── */
+.dau-wrap{display:flex;align-items:flex-end;gap:3px;height:90px;padding-top:4px;}
+.b-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;}
+.b-bar{width:100%;border-radius:3px 3px 0 0;background:var(--blue);opacity:.55;transition:opacity .15s;min-height:3px;cursor:default;}
+.b-bar:hover{opacity:1;}
+.b-lbl{font-family:var(--mono);font-size:9px;color:var(--ink3);white-space:nowrap;}
 
-/* ── TIME DISTRIBUTION ── */
-.time-chart{width:100%;overflow:visible;}
+/* ── COURSE LIST ── */
+.c-list{display:flex;flex-direction:column;gap:9px;}
+.c-row{display:flex;align-items:center;gap:10px;}
+.c-rank{font-family:var(--mono);font-size:10px;color:var(--ink3);width:18px;text-align:right;flex-shrink:0;}
+.c-name{font-size:12px;color:var(--ink2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.c-track{width:72px;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.c-fill{height:100%;border-radius:2px;background:var(--blue);opacity:.6;}
+.c-cnt{font-family:var(--mono);font-size:11px;color:var(--ink3);width:28px;text-align:right;flex-shrink:0;}
 
-/* ── PAGE FLOW ── */
-.page-flow{display:flex;flex-direction:column;gap:6px;}
-.pf-row{display:flex;align-items:center;gap:10px;}
-.pf-rank{font-family:var(--mono);font-size:10px;color:var(--ink3);width:18px;text-align:right;flex-shrink:0;}
-.pf-name{font-size:12px;color:var(--ink);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pf-bar-wrap{width:100px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0;}
-.pf-bar{height:100%;border-radius:3px;transition:width .6s ease;}
-.pf-cnt{font-family:var(--mono);font-size:10px;color:var(--ink3);width:30px;text-align:right;flex-shrink:0;}
+/* ── COMPARE TABLE ── */
+.ctable{width:100%;border-collapse:collapse;}
+.ctable th{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:2px solid var(--border);color:var(--ink3);}
+.ctable th.ht{color:var(--blue);}
+.ctable th.hd{color:var(--orange);}
+.ctable td{padding:10px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink2);}
+.ctable tr:last-child td{border-bottom:none;}
+.ctable td.num{font-family:var(--mono);font-size:12px;color:var(--ink);}
+.chip{display:inline-block;padding:2px 8px;border-radius:100px;font-family:var(--mono);font-size:11px;}
+.chip.g{background:var(--green-light);color:var(--green);}
+.chip.n{background:var(--surface2);color:var(--ink3);}
 
-/* ── INSIGHT BOX ── */
-.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.ins-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
-.ins-icon{font-size:22px;margin-bottom:10px;}
-.ins-title{font-size:13px;font-weight:600;margin-bottom:6px;}
-.ins-body{font-size:12px;color:var(--ink2);line-height:1.6;}
-.ins-body strong{color:var(--ink);}
+/* ── FUNNEL ── */
+.funnel{display:flex;flex-direction:column;}
+.f-row{padding:11px 0;border-bottom:1px solid var(--border);}
+.f-row:last-child{border-bottom:none;}
+.f-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.f-left{display:flex;align-items:center;gap:8px;}
+.f-num{font-family:var(--mono);font-size:10px;color:var(--ink3);background:var(--surface2);border:1px solid var(--border);padding:1px 6px;border-radius:4px;}
+.f-step{font-size:13px;color:var(--ink);}
+.f-right{display:flex;align-items:center;gap:8px;}
+.f-count{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);}
+.f-pct{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:100px;}
+.f-pct.hi{background:var(--green-light);color:var(--green);}
+.f-pct.lo{background:var(--red-light);color:var(--red);}
+.f-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.f-fill{height:100%;border-radius:2px;background:var(--blue);transition:width .8s cubic-bezier(.23,1,.32,1);}
+.f-connector{text-align:center;padding:3px 0;font-size:10px;color:var(--ink3);}
 
-/* ── SKELETON ── */
-.skel{background:linear-gradient(90deg,var(--border) 25%,#ece9e3 50%,var(--border) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:4px;}
-@keyframes shim{to{background-position:-200% 0;}}
+/* ── BEHAVIOR LIST ── */
+.b-list{display:flex;flex-direction:column;gap:9px;}
+.beh-row{display:flex;align-items:center;gap:8px;}
+.beh-rk{font-family:var(--mono);font-size:10px;color:var(--ink3);width:16px;flex-shrink:0;}
+.beh-nm{font-size:12px;color:var(--ink2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.beh-track{width:60px;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.beh-fill{height:100%;border-radius:2px;}
+.beh-cnt{font-family:var(--mono);font-size:11px;color:var(--ink3);width:28px;text-align:right;flex-shrink:0;}
 
-/* ── LOADING OVERLAY ── */
-.loading-overlay{position:fixed;inset:0;background:rgba(245,243,239,.85);backdrop-filter:blur(4px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:100;transition:opacity .3s;}
-.loading-overlay.hidden{opacity:0;pointer-events:none;}
-.loading-spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--trial);border-radius:50%;animation:spin .8s linear infinite;}
-.loading-text{font-family:var(--mono);font-size:12px;color:var(--ink2);}
+/* ── INSIGHT GRID ── */
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.ins-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:0;}
+.ins-top{display:flex;align-items:center;gap:7px;margin-bottom:10px;}
+.ins-badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:100px;flex-shrink:0;}
+.ins-title{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:8px;}
+.ins-body{font-size:12px;color:var(--ink2);line-height:1.7;flex:1;}
+.ins-body strong{color:var(--ink);font-weight:600;}
+.ins-action{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;font-weight:500;}
+
+/* ── LOADING ── */
+.overlay{position:fixed;inset:0;background:rgba(248,249,251,.92);backdrop-filter:blur(4px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:100;transition:opacity .3s;}
+.overlay.hidden{opacity:0;pointer-events:none;}
+.spinner{width:28px;height:28px;border:2px solid var(--border2);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;}
+.lmsg{font-family:var(--mono);font-size:12px;color:var(--ink3);}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── ANIM ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.fade-up{animation:fadeUp .4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.fu{animation:fadeUp .4s ease both;}
 
 /* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .summary-grid{grid-template-columns:repeat(2,1fr);}
-  .compare-grid,.insight-grid{grid-template-columns:1fr;}
-}
-@media(max-width:520px){.summary-grid{grid-template-columns:1fr;}}
+@media(max-width:1000px){.g4,.g3,.ins-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.g4,.g3,.g2,.ins-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-spinner"></div>
-  <div class="loading-text" id="loadingText">Mixpanel 데이터 불러오는 중…</div>
+<div class="overlay" id="overlay">
+  <div class="spinner"></div>
+  <div class="lmsg" id="lmsg">데이터 불러오는 중…</div>
 </div>
 
 <div class="shell">
 
   <!-- HEADER -->
   <header class="header">
-    <div class="header-left">
-      <div class="eyebrow">ULIFT · Cohort Analysis</div>
-      <h1 class="page-title">셀 체험 vs<br><em>바로 구매</em></h1>
-    </div>
+    <div class="logo">CodingValley <span>Analytics</span></div>
     <div class="header-right">
-      <div class="date-range-btns">
-        <button class="dr-btn" onclick="load()">7일</button>
-        <button class="dr-btn active" onclick="load()" id="btn30">30일</button>
-        <button class="dr-btn" onclick="load()">90일</button>
-      </div>
-      <div class="status-row">
-        <div class="dot" id="statusDot"></div>
-        <span id="statusText">연결 중…</span>
-      </div>
+      <span class="schedule-badge">🕘 매일 09:00 KST 자동 갱신</span>
+      <span class="updated" id="updatedAt"></span>
+      <div class="status"><div class="dot" id="dot"></div><span id="statusTxt">로딩 중…</span></div>
     </div>
   </header>
+  <div class="divider"></div>
 
-  <div class="legend">
-    <div class="leg-item"><div class="leg-dot" style="background:var(--trial)"></div>셀 체험 후 구매</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--direct)"></div>바로 구매</div>
+  <!-- KPI -->
+  <div class="sec">
+    <div class="sec-header"><span class="sec-title">핵심 지표</span><span class="sec-tag">KPI</span></div>
+    <div class="g4" id="kpiGrid"></div>
   </div>
 
-  <!-- SUMMARY -->
-  <section>
-    <div class="summary-grid" id="summaryGrid">
-      <div class="s-card t"><div class="s-label">셀 체험 후 구매</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
-      <div class="s-card d"><div class="s-label">바로 구매</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
-      <div class="s-card g"><div class="s-label">셀→구매 전환율</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
-      <div class="s-card" style="--c:#888"><div class="s-label">총 구매자</div><div class="s-val skel" style="height:36px;width:80px">&nbsp;</div></div>
-    </div>
-  </section>
+  <!-- DAU -->
+  <div class="sec">
+    <div class="sec-header"><span class="sec-title">일별 활성 사용자</span><span class="sec-tag">DAU TREND</span></div>
+    <div class="card"><div class="dau-wrap" id="dauChart"></div></div>
+  </div>
 
-  <!-- TIME TO PURCHASE -->
-  <section>
-    <div class="sec-title">구매까지 걸린 시간<span class="sec-tag">TIME TO PURCHASE</span></div>
-    <div class="compare-grid">
-      <div class="c-panel trial-panel">
-        <div class="c-panel-title">셀 체험 후 구매 그룹</div>
-        <div id="trial-time-stats"></div>
+  <!-- COURSE + COHORT -->
+  <div class="sec">
+    <div class="g2">
+      <div class="card">
+        <div class="sec-header" style="margin-bottom:14px"><span class="sec-title">코스별 무료체험 TOP 10</span><span class="sec-tag">TRIAL</span></div>
+        <div class="c-list" id="courseList"></div>
       </div>
-      <div class="c-panel direct-panel">
-        <div class="c-panel-title">바로 구매 그룹</div>
-        <div id="direct-time-stats"></div>
+      <div class="card">
+        <div class="sec-header" style="margin-bottom:14px"><span class="sec-title">무료체험 후 구매 vs 바로 구매</span><span class="sec-tag">COHORT</span></div>
+        <table class="ctable" id="cohortTable"></table>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- COUPON & VISIT -->
-  <section>
-    <div class="sec-title">쿠폰 사용률 · 방문 패턴<span class="sec-tag">ENGAGEMENT</span></div>
-    <div class="c-panel" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;">
-      <div class="bar-compare" id="barCompare"></div>
-    </div>
-  </section>
+  <!-- FUNNEL -->
+  <div class="sec">
+    <div class="sec-header"><span class="sec-title">LDM7 → 결제 완료 퍼널</span><span class="sec-tag">FUNNEL</span></div>
+    <div class="card"><div class="funnel" id="funnelList"></div></div>
+  </div>
 
-  <!-- PAGE FLOW -->
-  <section>
-    <div class="sec-title">구매 전 주요 방문 페이지<span class="sec-tag">PAGE PATTERN</span></div>
-    <div class="compare-grid">
-      <div class="c-panel trial-panel">
-        <div class="c-panel-title">셀 체험 후 구매 그룹</div>
-        <div class="page-flow" id="trial-pages"></div>
+  <!-- BEHAVIOR -->
+  <div class="sec">
+    <div class="g2">
+      <div class="card">
+        <div class="sec-header" style="margin-bottom:14px"><span class="sec-title">LDM7 방문 후 다음 행동</span><span class="sec-tag">BEHAVIOR</span></div>
+        <div class="b-list" id="ldm7Beh"></div>
       </div>
-      <div class="c-panel direct-panel">
-        <div class="c-panel-title">바로 구매 그룹</div>
-        <div class="page-flow" id="direct-pages"></div>
+      <div class="card">
+        <div class="sec-header" style="margin-bottom:14px"><span class="sec-title">구매자 결제 전 방문 경로</span><span class="sec-tag">PATH</span></div>
+        <div class="b-list" id="tossBeh"></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- PM INSIGHTS -->
-  <section>
-    <div class="sec-title">에듀테크 PM 인사이트<span class="sec-tag">RECOMMENDED METRICS</span></div>
-    <div class="insight-grid" id="insightGrid"></div>
-  </section>
+  <!-- INSIGHTS -->
+  <div class="sec">
+    <div class="sec-header"><span class="sec-title">PM 인사이트</span><span class="sec-tag">INSIGHTS</span></div>
+    <div class="ins-grid" id="insightGrid"></div>
+  </div>
 
-</div><!-- /shell -->
+</div>
 
 <script>
-// ── data.json URL — GitHub Pages에서 같은 경로에 위치
-const DATA_URL = './data.json';
-let currentData = null;
+var DATA_URL='./data.json';
+var fmt=function(n){return n==null?'—':Number(n).toLocaleString('ko-KR');};
+var fmtH=function(ms){if(!ms)return'—';var h=ms/3600000;if(h<1)return Math.round(ms/60000)+'분';if(h<24)return Math.round(h)+'시간';return(h/24).toFixed(1)+'일';};
+var fmtP=function(n){return n==null?'—':Number(n).toFixed(1)+'%';};
 
-const fmt    = n => n == null ? '—' : Number(n).toLocaleString('ko-KR');
-const fmtPct = n => n == null ? '—' : n.toFixed(1) + '%';
-const fmtMs  = ms => {
-  if (ms == null) return '—';
-  const h = ms / 3600000;
-  if (h < 1)   return Math.round(ms / 60000) + '분';
-  if (h < 24)  return Math.round(h) + '시간';
-  return (h / 24).toFixed(1) + '일';
-};
+function setStatus(ok,msg){document.getElementById('dot').className='dot'+(ok?'':' err');document.getElementById('statusTxt').textContent=msg;}
 
-function setStatus(ok, msg) {
-  document.getElementById('statusDot').className = 'dot' + (ok ? '' : ' error');
-  document.getElementById('statusText').textContent = msg;
-}
-function showLoading(msg='데이터 불러오는 중…') {
-  document.getElementById('loadingText').textContent = msg;
-  document.getElementById('loadingOverlay').classList.remove('hidden');
-}
-function hideLoading() {
-  document.getElementById('loadingOverlay').classList.add('hidden');
-}
-
-function renderSummary(d) {
-  document.getElementById('summaryGrid').innerHTML = `
-    <div class="s-card t fade-up" style="animation-delay:.05s">
-      <div class="s-label">셀 체험 후 구매</div>
-      <div class="s-val">${fmt(d.trial.count)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
-      <div class="s-sub">전체 구매자의 ${fmtPct(d.trial.count / (d.totalBuyers||1) * 100)}</div>
-    </div>
-    <div class="s-card d fade-up" style="animation-delay:.10s">
-      <div class="s-label">바로 구매</div>
-      <div class="s-val">${fmt(d.direct.count)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
-      <div class="s-sub">전체 구매자의 ${fmtPct(d.direct.count / (d.totalBuyers||1) * 100)}</div>
-    </div>
-    <div class="s-card g fade-up" style="animation-delay:.15s">
-      <div class="s-label">셀→구매 전환율</div>
-      <div class="s-val">${fmtPct(d.conversionRate.trialToPurchase)}</div>
-      <div class="s-sub">셀 체험자 ${fmt(d.conversionRate.allTrialUsers)}명 중</div>
-    </div>
-    <div class="s-card fade-up" style="--c:#888;animation-delay:.20s">
-      <div class="s-label">총 구매자 (기간 내)</div>
-      <div class="s-val">${fmt(d.totalBuyers)}<span style="font-family:var(--mono);font-size:14px;color:var(--ink2)">명</span></div>
-      <div class="s-sub">${d.from} ~ ${d.to}</div>
-    </div>
-  `;
-}
-
-function renderTimePanel(elId, stat, color) {
-  const el = document.getElementById(elId);
-  if (!stat.medianTime) {
-    el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:12px;padding:12px 0">데이터 부족</div>';
-    return;
-  }
-  el.innerHTML = `
-    <div class="stat-row"><span class="stat-name">중앙값 (Median)</span><span class="stat-val" style="color:${color}">${fmtMs(stat.medianTime)}</span></div>
-    <div class="stat-row"><span class="stat-name">평균</span><span class="stat-val">${fmtMs(stat.meanTime)}</span></div>
-    <div class="stat-row"><span class="stat-name">평균 방문 횟수</span><span class="stat-val">${stat.avgVisits}회</span></div>
-  `;
-}
-
-function renderBarCompare(d) {
-  const items = [
-    { name:'쿠폰 사용률', tVal:fmtPct(d.trial.couponRate), dVal:fmtPct(d.direct.couponRate), tPct:d.trial.couponRate, dPct:d.direct.couponRate },
-    { name:'평균 방문 횟수', tVal:d.trial.avgVisits+'회', dVal:d.direct.avgVisits+'회',
-      tPct:Math.min(100,d.trial.avgVisits/Math.max(d.trial.avgVisits,d.direct.avgVisits,1)*100),
-      dPct:Math.min(100,d.direct.avgVisits/Math.max(d.trial.avgVisits,d.direct.avgVisits,1)*100) },
+/* KPI */
+function renderKPI(d){
+  var dau=d.dau&&d.dau.length?d.dau[d.dau.length-1].count:0;
+  var prev=d.dau&&d.dau.length>1?d.dau[d.dau.length-2].count:null;
+  var delta=prev&&prev>0?((dau-prev)/prev*100):null;
+  var deltaHtml=delta!=null?'<div class="kpi-delta '+(delta>=0?'up':'dn')+'">'+(delta>=0?'▲ +':'▼ ')+delta.toFixed(1)+'% 전일</div>':'';
+  var items=[
+    {label:'MAU',val:fmt(d.mau),sub:'기간 내 순 방문자',color:'#3b6ef5',extra:''},
+    {label:'DAU',val:fmt(dau),sub:'어제 기준',color:'#3b6ef5',extra:deltaHtml},
+    {label:'셀체험 전환율',val:fmtP(d.cohort.trialConversionRate),sub:'체험자 '+fmt(d.cohort.totalTrialUsers)+'명 중',color:'#18a058',extra:''},
+    {label:'바로 구매',val:fmt(d.cohort.direct.count),sub:'구매자 중 미체험',color:'#e86830',extra:''},
   ];
-  document.getElementById('barCompare').innerHTML = items.map(i => `
-    <div class="bc-row">
-      <div class="bc-label"><span class="bc-name">${i.name}</span><div class="bc-vals"><span class="bc-val t">● ${i.tVal}</span><span class="bc-val d">● ${i.dVal}</span></div></div>
-      <div class="bc-tracks">
-        <div class="bc-track"><div class="bc-fill t" style="width:${i.tPct}%"></div></div>
-        <div class="bc-track"><div class="bc-fill d" style="width:${i.dPct}%"></div></div>
-      </div>
-    </div>`).join('');
+  document.getElementById('kpiGrid').innerHTML=items.map(function(c,i){
+    return '<div class="kpi-card fu" style="--kpi-color:'+c.color+';animation-delay:'+(i*.07)+'s">'
+      +'<div class="kpi-label">'+c.label+'</div>'
+      +'<div class="kpi-val">'+c.val+'</div>'
+      +'<div class="kpi-sub">'+c.sub+'</div>'
+      +c.extra+'</div>';
+  }).join('');
 }
 
-function renderPages(elId, pages, color) {
-  const el = document.getElementById(elId);
-  const max = pages[0]?.count || 1;
-  const cleanName = p => {
-    if (!p) return '(알 수 없음)';
-    const map = {'/':'홈','/freetrial':'무료체험','/offering':'상품 페이지','/course_list':'코스 목록','/signin':'로그인','/profile':'프로필','/review':'리뷰'};
-    const key = Object.keys(map).find(k => p.includes(k));
-    return key ? map[key] : p.split('/').filter(Boolean).pop() || p;
+/* DAU */
+function renderDAU(d){
+  var el=document.getElementById('dauChart');
+  if(!d.dau||!d.dau.length){el.innerHTML='<div style="color:var(--ink3);font-size:12px;padding:30px;flex:1">데이터 없음</div>';return;}
+  var max=Math.max.apply(null,d.dau.map(function(x){return x.count;}));
+  el.innerHTML=d.dau.map(function(item){
+    var h=max?Math.max(4,(item.count/max*100)):4;
+    return '<div class="b-col"><div class="b-bar" style="height:'+h+'%" title="'+item.date+' · '+fmt(item.count)+'명"></div><div class="b-lbl">'+item.date.slice(5)+'</div></div>';
+  }).join('');
+}
+
+/* COURSE */
+function renderCourse(d){
+  var list=d.courseTrials||[];var max=list.length?list[0].count:1;
+  document.getElementById('courseList').innerHTML=list.length?list.map(function(c,i){
+    return '<div class="c-row"><span class="c-rank">'+(i+1)+'</span><span class="c-name" title="'+c.course+'">'+c.course+'</span><div class="c-track"><div class="c-fill" style="width:'+(c.count/max*100).toFixed(0)+'%"></div></div><span class="c-cnt">'+fmt(c.count)+'</span></div>';
+  }).join(''):'<div style="color:var(--ink3);font-size:12px">데이터 없음</div>';
+}
+
+/* COHORT */
+function renderCohort(d){
+  var t=d.cohort.trial,dr=d.cohort.direct;
+  var rows=[
+    {name:'구매자 수',tv:fmt(t.count)+'명',dv:fmt(dr.count)+'명',better:null},
+    {name:'구매까지 시간(중앙값)',tv:fmtH(t.medianTime),dv:fmtH(dr.medianTime),better:t.medianTime&&dr.medianTime?(t.medianTime<dr.medianTime?'t':'d'):null},
+    {name:'쿠폰 사용률',tv:fmtP(t.couponRate),dv:fmtP(dr.couponRate),better:t.couponRate!=null&&dr.couponRate!=null?(t.couponRate<dr.couponRate?'t':'d'):null},
+    {name:'평균 방문 횟수',tv:t.avgVisits+'회',dv:dr.avgVisits+'회',better:t.avgVisits>dr.avgVisits?'t':'d'},
+    {name:'체험→구매 전환율',tv:fmtP(d.cohort.trialConversionRate),dv:'—',better:null},
+  ];
+  document.getElementById('cohortTable').innerHTML=
+    '<thead><tr><th>지표</th><th class="ht">🔵 셀체험 후 구매</th><th class="hd">🟠 바로 구매</th></tr></thead><tbody>'
+    +rows.map(function(r){
+      return '<tr><td>'+r.name+'</td>'
+        +'<td class="num"><span class="chip '+(r.better==='t'?'g':'n')+'">'+r.tv+'</span></td>'
+        +'<td class="num"><span class="chip '+(r.better==='d'?'g':'n')+'">'+r.dv+'</span></td></tr>';
+    }).join('')+'</tbody>';
+}
+
+/* FUNNEL */
+function renderFunnel(d){
+  var steps=d.funnel||[];var first=steps.length?steps[0].count:1;
+  document.getElementById('funnelList').innerHTML=steps.map(function(s,i){
+    var fromPrev=i>0&&steps[i-1].count?(s.count/steps[i-1].count*100):null;
+    var fromFirst=first?(s.count/first*100):0;
+    var pctCls=fromPrev!=null?(fromPrev>=50?'hi':'lo'):'hi';
+    var html='';
+    if(i>0) html+='<div class="f-connector">↓ '+(fromPrev!=null?fromPrev.toFixed(1)+'% 유지':'')+'</div>';
+    html+='<div class="f-row"><div class="f-top">'
+      +'<div class="f-left"><span class="f-num">'+(i+1)+'</span><span class="f-step">'+s.step+'</span></div>'
+      +'<div class="f-right"><span class="f-count">'+fmt(s.count)+'명</span>'
+      +(fromPrev!=null?'<span class="f-pct '+pctCls+'">'+fromPrev.toFixed(1)+'%</span>':'')
+      +'</div></div>'
+      +'<div class="f-track"><div class="f-fill" style="width:'+Math.min(100,fromFirst).toFixed(1)+'%"></div></div>'
+      +'</div>';
+    return html;
+  }).join('');
+}
+
+/* BEHAVIOR */
+function renderBeh(elId,list,color){
+  var el=document.getElementById(elId);var max=list&&list.length?list[0].count:1;
+  el.innerHTML=list&&list.length?list.map(function(b,i){
+    var nm=b.action||b.page||'—';
+    return '<div class="beh-row"><span class="beh-rk">'+(i+1)+'</span><span class="beh-nm" title="'+nm+'">'+nm+'</span><div class="beh-track"><div class="beh-fill" style="width:'+(b.count/max*100).toFixed(0)+'%;background:'+color+'"></div></div><span class="beh-cnt">'+fmt(b.count)+'</span></div>';
+  }).join(''):'<div style="color:var(--ink3);font-size:12px">데이터 없음</div>';
+}
+
+/* INSIGHTS */
+function renderInsights(d){
+  var t=d.cohort.trial,dr=d.cohort.direct;
+  var funnel=d.funnel||[];
+  var s0=funnel[0]?funnel[0].count:0,s1=funnel[1]?funnel[1].count:0,s2=funnel[2]?funnel[2].count:0,sLast=funnel[funnel.length-1]?funnel[funnel.length-1].count:0;
+  var scrollRate=s0?+(s1/s0*100).toFixed(1):0;
+  var couponRate=s1?+(s2/s1*100).toFixed(1):0;
+  var overallConv=s0?+(sLast/s0*100).toFixed(1):0;
+  var timeDiff=t.medianTime&&dr.medianTime?Math.round((dr.medianTime-t.medianTime)/3600000):null;
+  var couponGap=t.couponRate!=null&&dr.couponRate!=null?(dr.couponRate-t.couponRate).toFixed(1):null;
+
+  var cards=[
+    {
+      badge:'이탈 분석',badgeBg:'#fff0f0',badgeColor:'#e03e3e',accentColor:'#e03e3e',
+      title:'LDM7 상단 이탈이 핵심 병목',
+      body:'LDM7 방문자 <strong>'+fmt(s0)+'명</strong> 중 스크롤 5%를 넘긴 비율은 <strong>'+scrollRate+'%</strong>입니다. 절반 가까이가 첫 화면에서 이탈하고 있어요. 히어로 섹션의 메시지와 CTA가 충분히 흥미를 유발하지 못하는 신호입니다.',
+      action:'👉 히어로 섹션 카피 A/B 테스트 우선 진행',
+      actionColor:'#e03e3e',
+    },
+    {
+      badge:'전환 기회',badgeBg:'#fffaeb',badgeColor:'#c98f00',accentColor:'#c98f00',
+      title:'쿠폰 모달 전환율 집중 개선 필요',
+      body:'스크롤 5% 이상 유저 중 쿠폰 모달을 연 비율은 <strong>'+couponRate+'%</strong>입니다. 모달을 열었다는 건 구매 의향이 높다는 신호예요. 모달 내 메시지, 할인율, 버튼 UX 개선이 직접적인 매출 증대로 이어집니다.',
+      action:'👉 쿠폰 모달 → 결제 전환율 별도 집계 후 최적화',
+      actionColor:'#c98f00',
+    },
+    {
+      badge:'체험 효과',badgeBg:'#eef2ff',badgeColor:'#3b6ef5',accentColor:'#3b6ef5',
+      title:'셀 체험이 구매 결정을 앞당김'+(timeDiff&&timeDiff>0?' ('+timeDiff+'시간 차이)':''),
+      body:timeDiff!=null
+        ?'셀 체험 후 구매 그룹의 구매까지 중앙 시간은 <strong>'+fmtH(t.medianTime)+'</strong>, 바로 구매 그룹은 <strong>'+fmtH(dr.medianTime)+'</strong>. 체험이 구매 확신을 높이는 효과가 데이터로 확인됩니다.'
+        :'셀 체험 후 구매 그룹과 바로 구매 그룹의 구매 결정 시간을 비교해 체험의 효과를 정량적으로 검증할 수 있어요.',
+      action:'👉 셀 체험 완료 직후 구매 유도 팝업 실험',
+      actionColor:'#3b6ef5',
+    },
+    {
+      badge:'가격 전략',badgeBg:'#fff2ec',badgeColor:'#e86830',accentColor:'#e86830',
+      title:couponGap&&+couponGap>5?'바로구매 그룹의 높은 쿠폰 의존도':'두 그룹의 쿠폰 사용 패턴',
+      body:couponGap!=null
+        ?'바로 구매 그룹의 쿠폰 사용률(<strong>'+fmtP(dr.couponRate)+'</strong>)이 셀 체험 그룹(<strong>'+fmtP(t.couponRate)+'</strong>)보다 <strong>'+couponGap+'%p 높습니다</strong>. 체험 없이 구매한 유저일수록 할인이 주요 결정 요인임을 시사합니다.'
+        :'두 그룹의 쿠폰 사용 패턴 비교를 통해 할인 민감도를 파악하면 가격 전략 최적화에 활용할 수 있어요.',
+      action:'👉 비체험 구매자 가격 민감도 분석 진행',
+      actionColor:'#e86830',
+    },
+    {
+      badge:'전환율',badgeBg:'#e8f7ef',badgeColor:'#18a058',accentColor:'#18a058',
+      title:'LDM7 전체 퍼널 전환율 '+overallConv+'%',
+      body:'LDM7 방문 <strong>'+fmt(s0)+'명</strong> → 최종 결제 <strong>'+fmt(sLast)+'명</strong>. 에듀테크 랜딩페이지 업계 평균(2~5%)과 비교해 현재 수치를 평가하고, 이탈이 가장 많은 단계를 우선 개선하세요.',
+      action:'👉 퍼널 각 단계별 이탈 원인 정성 리서치 병행',
+      actionColor:'#18a058',
+    },
+    {
+      badge:'업계 기준',badgeBg:'var(--surface2)',badgeColor:'var(--ink3)',accentColor:'var(--ink3)',
+      title:'에듀테크 PM 핵심 벤치마크',
+      body:'무료체험 → 유료 전환 업계 평균 <strong>15~25%</strong> / 랜딩페이지 평균 전환율 <strong>2~5%</strong> / AHA moment(첫 학습 완료) 달성 유저는 미달성 유저 대비 구매 전환율 <strong>3~5배</strong>. 셀 완료 이벤트를 별도 추적하면 정밀 분석이 가능합니다.',
+      action:'👉 cell_complete 이벤트 트래킹 추가 검토',
+      actionColor:'var(--ink2)',
+    },
+  ];
+
+  document.getElementById('insightGrid').innerHTML=cards.map(function(c,i){
+    return '<div class="ins-card fu" style="animation-delay:'+(i*.07)+'s">'
+      +'<div class="ins-top"><span class="ins-badge" style="background:'+c.badgeBg+';color:'+c.badgeColor+'">'+c.badge+'</span></div>'
+      +'<div class="ins-title">'+c.title+'</div>'
+      +'<div class="ins-body">'+c.body+'</div>'
+      +'<div class="ins-action" style="color:'+c.actionColor+'">'+c.action+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+/* RENDER */
+function render(data){
+  renderKPI(data); renderDAU(data); renderCourse(data);
+  renderCohort(data); renderFunnel(data);
+  renderBeh('ldm7Beh',data.ldm7Behavior,'#3b6ef5');
+  renderBeh('tossBeh',data.tossPages,'#e86830');
+  renderInsights(data);
+  if(data.meta&&data.meta.updatedAt){
+    document.getElementById('updatedAt').textContent='Last updated '+new Date(data.meta.updatedAt).toLocaleString('ko-KR');
+  }
+}
+
+/* MOCK */
+function getMock(){
+  var dau=[];
+  for(var i=29;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);dau.push({date:d.toISOString().split('T')[0],count:Math.floor(200+Math.random()*250+Math.sin(i/4)*60)});}
+  return{
+    meta:{updatedAt:new Date().toISOString(),from:'(mock)',to:'(mock)'},
+    mau:3842,dau:dau,
+    courseTrials:[{course:'파이썬 첫걸음',count:312},{course:'AI 업무 자동화',count:241},{course:'n8n 업무 자동화 입문',count:198},{course:'ChatGPT 실무 활용',count:155},{course:'데이터 분석 입문',count:102},{course:'엑셀 자동화',count:88},{course:'웹 크롤링',count:71},{course:'SQL 기초',count:58}],
+    cohort:{trial:{count:142,medianTime:172800000,couponRate:31.7,avgVisits:7.2},direct:{count:89,medianTime:345600000,couponRate:52.8,avgVisits:4.1},trialConversionRate:18.4,totalTrialUsers:771},
+    funnel:[{step:'LDM7 방문',count:3241},{step:'스크롤 5% 이상',count:1687},{step:'쿠폰 모달 오픈',count:842},{step:'마스터패키지(LDM6)',count:561},{step:'결제 상세(/payment)',count:312},{step:'결제 완료',count:231}],
+    ldm7Behavior:[{action:'web_open_coupon_modal',count:412},{action:'/ldm6',count:289},{action:'/payment',count:198},{action:'web_complete_purchase',count:141},{action:'/',count:98}],
+    tossPages:[{page:'/ldm7',count:231},{page:'/ldm6',count:198},{page:'/payment',count:231},{page:'/',count:142},{page:'/courses',count:87}],
   };
-  if (!pages.length) { el.innerHTML = '<div style="color:var(--ink3);font-family:var(--mono);font-size:12px">데이터 없음</div>'; return; }
-  el.innerHTML = pages.map((pg,i) => `
-    <div class="pf-row">
-      <span class="pf-rank">${i+1}</span>
-      <span class="pf-name">${cleanName(pg.page)}</span>
-      <div class="pf-bar-wrap"><div class="pf-bar" style="width:${(pg.count/max*100).toFixed(0)}%;background:${color};opacity:.7"></div></div>
-      <span class="pf-cnt">${fmt(pg.count)}</span>
-    </div>`).join('');
 }
 
-function renderInsights(d) {
-  const t = d.trial, dir = d.direct;
-  const timeDiff   = t.medianTime && dir.medianTime ? ((dir.medianTime-t.medianTime)/dir.medianTime*100).toFixed(0) : null;
-  const couponDiff = (t.couponRate - dir.couponRate).toFixed(1);
-  const visitDiff  = (t.avgVisits  - dir.avgVisits).toFixed(1);
-  const cards = [
-    { icon:'⏱️', title:'구매 결정 속도',
-      body: timeDiff != null ? `셀 체험 그룹은 바로구매 그룹보다 구매 결정이 <strong>${Math.abs(timeDiff)}% ${+timeDiff>0?'빠릅니다':'느립니다'}</strong>. ${+timeDiff>0?'체험이 구매 확신을 높이는 효과가 있습니다.':'체험 후에도 추가 탐색이 필요함을 의미합니다.'}` : '데이터가 충분히 쌓이면 분석됩니다.' },
-    { icon:'🎟️', title:'쿠폰 의존도',
-      body:`셀 체험 그룹 쿠폰 사용률 <strong>${fmtPct(t.couponRate)}</strong> vs 바로구매 <strong>${fmtPct(dir.couponRate)}</strong>. ${+couponDiff>2?'체험 그룹이 쿠폰에 더 의존합니다 — A/B 테스트 권장.':'두 그룹의 쿠폰 의존도가 유사합니다.'}` },
-    { icon:'🔁', title:'재방문 행동',
-      body:`셀 체험 그룹 평균 <strong>${t.avgVisits}회</strong> 방문 vs 바로구매 <strong>${dir.avgVisits}회</strong>. ${+visitDiff>1?'체험 그룹이 더 많이 탐색 — 이탈을 줄이는 넛지가 효과적.':'방문 패턴 유사.'}` },
-    { icon:'🎯', title:'셀→구매 전환 최적화',
-      body:`현재 셀 체험자의 구매 전환율 <strong>${fmtPct(d.conversionRate.trialToPurchase)}</strong>. 체험 완료 직후 <strong>할인 오퍼</strong>나 <strong>진도 리포트</strong> 제공이 전환율 향상에 효과적입니다.` },
-    { icon:'📍', title:'핵심 이탈 구간',
-      body:'<strong>상품 페이지 → 결제 단계</strong> 사이의 마찰 제거가 전환율에 가장 직접적 영향을 미칩니다.' },
-    { icon:'📈', title:'에듀테크 업계 벤치마크',
-      body:'에듀테크 무료체험 → 유료 전환율 업계 평균 <strong>15~25%</strong>. <strong>첫 학습 완료(AHA moment)</strong> 달성 여부가 전환율의 핵심 예측 변수입니다.' },
-  ];
-  document.getElementById('insightGrid').innerHTML = cards.map((c,i) => `
-    <div class="ins-card fade-up" style="animation-delay:${.05*i}s">
-      <div class="ins-icon">${c.icon}</div>
-      <div class="ins-title">${c.title}</div>
-      <div class="ins-body">${c.body}</div>
-    </div>`).join('');
-}
-
-function render(raw) {
-  const d = raw.cohort ? { ...raw.cohort, from:raw.meta?.from, to:raw.meta?.to } : raw;
-  currentData = d;
-  renderSummary(d);
-  renderTimePanel('trial-time-stats',  d.trial,  'var(--trial)');
-  renderTimePanel('direct-time-stats', d.direct, 'var(--direct)');
-  renderBarCompare(d);
-  renderPages('trial-pages',  d.trial.topPages,  'var(--trial)');
-  renderPages('direct-pages', d.direct.topPages, 'var(--direct)');
-  renderInsights(d);
-}
-
-async function load() {
-  showLoading('data.json 불러오는 중…');
-  setStatus(true, '로딩 중…');
-  try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    render(data);
-    const updated = data.meta?.updatedAt ? new Date(data.meta.updatedAt).toLocaleString('ko-KR') : new Date().toLocaleString('ko-KR');
-    setStatus(true, '갱신: ' + updated);
-  } catch(e) {
-    console.error(e);
-    setStatus(false, 'data.json 없음 — Mock 데이터 표시 중');
-    render({ cohort:{ trial:{count:142,medianTime:172800000,meanTime:216000000,couponRate:38.7,couponCount:55,avgVisits:7.2,topPages:[{page:'/freetrial',count:142},{page:'/offering',count:118},{page:'/',count:97},{page:'/course_list',count:84},{page:'/review',count:61}]}, direct:{count:89,medianTime:345600000,meanTime:432000000,couponRate:52.8,couponCount:47,avgVisits:4.1,topPages:[{page:'/',count:89},{page:'/offering',count:76},{page:'/signin',count:54},{page:'/review',count:43},{page:'/course_list',count:38}]}, conversionRate:{trialToPurchase:18.4,allTrialUsers:771}, totalBuyers:231 }, meta:{from:'(mock)',to:'(mock)'} });
-  } finally {
-    hideLoading();
-  }
-}
-
-load();
+fetch(DATA_URL+'?t='+Date.now())
+  .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(function(data){render(data);setStatus(true,'연결됨');})
+  .catch(function(e){console.error(e);render(getMock());setStatus(false,'Mock 데이터 표시 중');})
+  .finally(function(){document.getElementById('overlay').classList.add('hidden');});
 </script>
 </body>
 </html>
