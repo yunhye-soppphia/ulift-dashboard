@@ -102,7 +102,7 @@ function processEvent(ev) {
   userMap[uid].push({
     event     : ev.event,
     time      : (props.time || 0) * 1000,
-    url       : props.current_url || props['$current_url'] || '',
+    url       : props.cep_url_path || props.current_url || props['$current_url'] || '',
     scrollPct : props['$mp_scroll_percentage'] || props.mp_scroll_percentage || props['$scroll_percentage'] || props.scroll_percentage || props.scrollPercentage || 0,
     courseName: props.course_name || '',
   });
