@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-03-23T10:22:08.465Z",
+    "updatedAt": "2026-03-23T10:42:13.379Z",
     "from": "2026-03-16",
     "to": "2026-03-22",
     "fetchDays": 7
@@ -39,15 +39,15 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 493
+      "count": 499
     },
     {
       "course": "AI 마케팅",
-      "count": 203
+      "count": 205
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 173
+      "count": 174
     },
     {
       "course": "Claude MCP 활용",
@@ -55,7 +55,7 @@
     },
     {
       "course": "파이썬 첫걸음",
-      "count": 60
+      "count": 58
     },
     {
       "course": "Gemini 완전 정복",
@@ -67,7 +67,7 @@
     },
     {
       "course": "파이썬 AI 주식 분석",
-      "count": 34
+      "count": 35
     },
     {
       "course": "수익형 웹 서비스 입문",
@@ -99,11 +99,11 @@
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 1
+      "count": 4533
     },
     {
       "step": "스크롤 5% 이상",
-      "count": 0
+      "count": 1784
     },
     {
       "step": "쿠폰 모달 오픈",
@@ -111,7 +111,7 @@
     },
     {
       "step": "마스터패키지(LDM6)",
-      "count": 0
+      "count": 1065
     },
     {
       "step": "결제 상세(/payment)",
@@ -124,7 +124,35 @@
   ],
   "ldm7Behavior": [
     {
-      "action": "/ldm7",
+      "action": "/ldm/7",
+      "count": 4438
+    },
+    {
+      "action": "/web-view/ldm/7",
+      "count": 51
+    },
+    {
+      "action": "$mp_scroll",
+      "count": 16
+    },
+    {
+      "action": "web_open_coupon_modal",
+      "count": 3
+    },
+    {
+      "action": "/ldm/6",
+      "count": 2
+    },
+    {
+      "action": "/courses",
+      "count": 1
+    },
+    {
+      "action": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
+      "count": 1
+    },
+    {
+      "action": "/about",
       "count": 1
     }
   ],
