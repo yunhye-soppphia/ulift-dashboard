@@ -194,16 +194,28 @@ function buildResult(from, to) {
   var paymentVisit = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/payment')!==-1; }); }).length;
 
   // LDM7 다음 행동
+  // LDM7 방문 후 다음 행동
+  // - 조건: 페이지뷰 이벤트만, /ldm/7 이 아닌 페이지, 웹뷰(/web-view) 제외
   var ldm7BehMap = {};
   allUids.forEach(function(uid) {
     var evs = userMap[uid];
     for (var i=0; i<evs.length-1; i++) {
+      // LDM7 페이지 진입 이벤트 찾기
+      if (evs[i].event !== '$mp_web_page_view') continue;
       if (evs[i].url.indexOf('/ldm/7') === -1) continue;
-      var next = evs[i+1];
-      var key  = next.event === '$mp_web_page_view'
-        ? (next.url.replace(/https?:\/\/[^/]+/,'').split('?')[0] || '/')
-        : next.event;
-      ldm7BehMap[key] = (ldm7BehMap[key]||0) + 1;
+
+      // 다음 이벤트 중 페이지뷰이면서 다른 페이지인 것 찾기
+      for (var j=i+1; j<evs.length; j++) {
+        var next = evs[j];
+        // 페이지뷰가 아니면 스킵 (스크롤 등 제외)
+        if (next.event !== '$mp_web_page_view') continue;
+        var nextPath = next.url.replace(/https?:\/\/[^/]+/,'').split('?')[0] || '/';
+        // LDM7 자기 자신, 웹뷰 경로 제외
+        if (nextPath.indexOf('/ldm/7') !== -1) continue;
+        if (nextPath.indexOf('/web-view') !== -1) continue;
+        ldm7BehMap[nextPath] = (ldm7BehMap[nextPath]||0) + 1;
+        break;
+      }
       break;
     }
   });
@@ -211,18 +223,34 @@ function buildResult(from, to) {
     .sort(function(a,b){return ldm7BehMap[b]-ldm7BehMap[a];})
     .slice(0,8).map(function(k){return{action:k,count:ldm7BehMap[k]};});
 
-  // 구매자 경로
+  // 구매자 결제 전 방문 경로
+  // - 결제 상세(/payment) 진입 직전까지의 페이지만 추출
+  // - /payment 관련 경로 전체 제외
   var tossPageMap = {};
   buyerUids.forEach(function(uid) {
     var evs = userMap[uid];
-    var buyIdx = -1;
-    for (var i=evs.length-1;i>=0;i--) {
-      if (evs[i].event==='web_complete_purchase'){buyIdx=i;break;}
+
+    // 결제 상세 진입 시점 찾기 (/payment 첫 방문)
+    var paymentIdx = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].event === '$mp_web_page_view' && evs[i].url.indexOf('/payment') !== -1) {
+        paymentIdx = i;
+        break;
+      }
     }
-    if (buyIdx<=0) return;
-    for (var j=Math.max(0,buyIdx-10);j<buyIdx;j++) {
-      if (evs[j].event!=='$mp_web_page_view') continue;
-      var pg = evs[j].url.replace(/https?:\/\/[^/]+/,'').split('?')[0]||'/';
+    if (paymentIdx <= 0) return;
+
+    // 결제 상세 진입 전 최대 15개 페이지뷰 수집 (payment 관련 경로 전체 제외)
+    var excludePaths = ['/payment', '/splash'];
+    for (var j=Math.max(0, paymentIdx-15); j<paymentIdx; j++) {
+      if (evs[j].event !== '$mp_web_page_view') continue;
+      var pg = evs[j].url.replace(/https?:\/\/[^/]+/,'').split('?')[0] || '/';
+      // 결제 관련 경로 제외
+      var excluded = false;
+      for (var k=0; k<excludePaths.length; k++) {
+        if (pg.indexOf(excludePaths[k]) !== -1) { excluded = true; break; }
+      }
+      if (excluded) continue;
       tossPageMap[pg] = (tossPageMap[pg]||0) + 1;
     }
   });
