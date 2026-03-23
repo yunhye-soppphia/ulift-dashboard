@@ -103,7 +103,7 @@ function processEvent(ev) {
     event     : ev.event,
     time      : (props.time || 0) * 1000,
     url       : props.current_url || props['$current_url'] || '',
-    scrollPct : props['$mp_scroll_percentage'] || props.mp_scroll_percentage || 0,
+    scrollPct : props['$mp_scroll_percentage'] || props.mp_scroll_percentage || props['$scroll_percentage'] || props.scroll_percentage || props.scrollPercentage || 0,
     courseName: props.course_name || '',
   });
 
@@ -187,10 +187,10 @@ function buildResult(from, to) {
   }
 
   // 퍼널
-  var ldm7Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm7')!==-1; }); }).length;
-  var ldm7Scroll5  = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm7')!==-1 && e.event==='$mp_scroll' && e.scrollPct>=5; }); }).length;
+  var ldm7Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/7')!==-1; }); }).length;
+  var ldm7Scroll5  = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/7')!==-1 && e.event==='$mp_scroll' && e.scrollPct>=5; }); }).length;
   var couponModal  = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.event==='web_open_coupon_modal'; }); }).length;
-  var ldm6Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm6')!==-1; }); }).length;
+  var ldm6Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/6')!==-1; }); }).length;
   var paymentVisit = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/payment')!==-1; }); }).length;
 
   // LDM7 다음 행동
@@ -198,7 +198,7 @@ function buildResult(from, to) {
   allUids.forEach(function(uid) {
     var evs = userMap[uid];
     for (var i=0; i<evs.length-1; i++) {
-      if (evs[i].url.indexOf('/ldm7') === -1) continue;
+      if (evs[i].url.indexOf('/ldm/7') === -1) continue;
       var next = evs[i+1];
       var key  = next.event === '$mp_web_page_view'
         ? (next.url.replace(/https?:\/\/[^/]+/,'').split('?')[0] || '/')
