@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-03-23T10:54:40.231Z",
+    "updatedAt": "2026-03-23T10:56:39.497Z",
     "from": "2026-03-16",
     "to": "2026-03-22",
     "fetchDays": 7
@@ -39,7 +39,7 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 497
+      "count": 496
     },
     {
       "course": "AI 마케팅",
@@ -47,7 +47,7 @@
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 174
+      "count": 170
     },
     {
       "course": "Claude MCP 활용",
@@ -63,18 +63,18 @@
     },
     {
       "course": "AI 바이브 코딩(파이썬)",
-      "count": 39
+      "count": 40
     },
     {
       "course": "파이썬 AI 주식 분석",
-      "count": 34
-    },
-    {
-      "course": "n8n 업무 자동화 입문",
-      "count": 30
+      "count": 35
     },
     {
       "course": "수익형 웹 서비스 입문",
+      "count": 30
+    },
+    {
+      "course": "n8n 업무 자동화 입문",
       "count": 30
     }
   ],
