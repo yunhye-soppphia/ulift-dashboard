@@ -28,7 +28,7 @@ jobs:
           MIXPANEL_USERNAME:   ${{ secrets.MIXPANEL_USERNAME }}
           MIXPANEL_SECRET:     ${{ secrets.MIXPANEL_SECRET }}
           MIXPANEL_PROJECT_ID: ${{ secrets.MIXPANEL_PROJECT_ID }}
-          FETCH_DAYS:          '30'
+          FETCH_DAYS:          '7'
         run: node scripts/fetch.js
 
       - name: Commit data.json
