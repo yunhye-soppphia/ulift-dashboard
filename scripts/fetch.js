@@ -186,12 +186,86 @@ function buildResult(from, to) {
     };
   }
 
-  // 퍼널
-  var ldm7Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/7')!==-1; }); }).length;
-  var ldm7Scroll5  = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/7')!==-1 && e.event==='$mp_scroll' && e.scrollPct>=5; }); }).length;
-  var couponModal  = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.event==='web_open_coupon_modal'; }); }).length;
-  var ldm6Visit    = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/ldm/6')!==-1; }); }).length;
-  var paymentVisit = allUids.filter(function(uid){ return userMap[uid].some(function(e){ return e.url.indexOf('/payment')!==-1; }); }).length;
+  // 퍼널 — 각 단계는 LDM7 방문 이후 순서대로 발생한 경우만 카운트
+  var ldm7Visit    = 0;
+  var ldm7Scroll5  = 0;
+  var couponModal  = 0;
+  var ldm6Visit    = 0;
+  var paymentVisit = 0;
+
+  allUids.forEach(function(uid) {
+    var evs = userMap[uid];
+
+    // 1단계: LDM7 방문 시점 찾기
+    var ldm7Time = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].url.indexOf('/ldm/7') !== -1) {
+        ldm7Time = evs[i].time;
+        break;
+      }
+    }
+    if (ldm7Time === -1) return;
+    ldm7Visit++;
+
+    // 2단계: LDM7 방문 이후 스크롤 5% 이상
+    var scroll5Time = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].time < ldm7Time) continue;
+      if (evs[i].url.indexOf('/ldm/7') !== -1 && evs[i].event === '$mp_scroll' && evs[i].scrollPct >= 5) {
+        scroll5Time = evs[i].time;
+        break;
+      }
+    }
+    if (scroll5Time === -1) return;
+    ldm7Scroll5++;
+
+    // 3단계: LDM7 방문 이후 쿠폰 모달 오픈 (LDM7 방문한 세션 내에서만)
+    var couponTime = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].time < ldm7Time) continue;
+      if (evs[i].event === 'web_open_coupon_modal') {
+        // LDM7 방문 이후, LDM7 페이지에서 열렸거나 LDM7 방문 후 바로 열린 경우만
+        // 직전 페이지뷰가 /ldm/7 이었는지 확인
+        var lastPageUrl = '';
+        for (var k=i-1; k>=0; k--) {
+          if (evs[k].event === '$mp_web_page_view') {
+            lastPageUrl = evs[k].url;
+            break;
+          }
+        }
+        if (lastPageUrl.indexOf('/ldm/7') !== -1) {
+          couponTime = evs[i].time;
+          break;
+        }
+      }
+    }
+    if (couponTime === -1) return;
+    couponModal++;
+
+    // 4단계: 쿠폰 모달 이후 LDM6 방문
+    var ldm6Time = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].time < ldm7Time) continue;
+      if (evs[i].url.indexOf('/ldm/6') !== -1) {
+        ldm6Time = evs[i].time;
+        break;
+      }
+    }
+    if (ldm6Time === -1) return;
+    ldm6Visit++;
+
+    // 5단계: LDM7 방문 이후 결제 상세
+    var payTime = -1;
+    for (var i=0; i<evs.length; i++) {
+      if (evs[i].time < ldm7Time) continue;
+      if (evs[i].url.indexOf('/payment') !== -1) {
+        payTime = evs[i].time;
+        break;
+      }
+    }
+    if (payTime === -1) return;
+    paymentVisit++;
+  });
 
   // LDM7 다음 행동
   // LDM7 방문 후 다음 행동
