@@ -1,23 +1,19 @@
 {
   "meta": {
-    "updatedAt": "2026-03-23T10:56:39.497Z",
-    "from": "2026-03-16",
-    "to": "2026-03-22",
+    "updatedAt": "2026-03-24T05:16:47.698Z",
+    "from": "2026-03-17",
+    "to": "2026-03-23",
     "fetchDays": 7
   },
-  "mau": 7907,
+  "mau": 7910,
   "dau": [
     {
-      "date": "2026-03-16",
-      "count": 1137
-    },
-    {
       "date": "2026-03-17",
-      "count": 1158
+      "count": 1157
     },
     {
       "date": "2026-03-18",
-      "count": 1544
+      "count": 1545
     },
     {
       "date": "2026-03-19",
@@ -25,7 +21,7 @@
     },
     {
       "date": "2026-03-20",
-      "count": 990
+      "count": 993
     },
     {
       "date": "2026-03-21",
@@ -34,122 +30,126 @@
     {
       "date": "2026-03-22",
       "count": 1061
+    },
+    {
+      "date": "2026-03-23",
+      "count": 1124
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 496
+      "count": 432
     },
     {
       "course": "AI 마케팅",
-      "count": 204
+      "count": 159
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 170
+      "count": 156
     },
     {
       "course": "Claude MCP 활용",
-      "count": 149
-    },
-    {
-      "course": "파이썬 첫걸음",
-      "count": 60
+      "count": 108
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 55
+      "count": 48
     },
     {
-      "course": "AI 바이브 코딩(파이썬)",
-      "count": 40
-    },
-    {
-      "course": "파이썬 AI 주식 분석",
-      "count": 35
-    },
-    {
-      "course": "수익형 웹 서비스 입문",
-      "count": 30
+      "course": "파이썬 첫걸음",
+      "count": 39
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 30
+      "count": 28
+    },
+    {
+      "course": "수익형 웹 서비스 입문",
+      "count": 24
+    },
+    {
+      "course": "파이썬 AI 주식 분석",
+      "count": 24
+    },
+    {
+      "course": "AI 바이브 코딩(파이썬)",
+      "count": 24
     }
   ],
   "cohort": {
     "trial": {
       "count": 8,
-      "medianTime": 34679000,
-      "meanTime": 37766250,
-      "couponRate": 100,
-      "avgVisits": 883.1
+      "medianTime": 21625000,
+      "meanTime": 33863571,
+      "couponRate": 87.5,
+      "avgVisits": 504.5
     },
     "direct": {
-      "count": 44,
-      "medianTime": 2707000,
-      "meanTime": 10486227,
+      "count": 39,
+      "medianTime": 2412000,
+      "meanTime": 9013211,
       "couponRate": 79.5,
-      "avgVisits": 210.6
+      "avgVisits": 134.7
     },
-    "trialConversionRate": 5.1,
-    "totalTrialUsers": 156
+    "trialConversionRate": 5,
+    "totalTrialUsers": 160
   },
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 4533
+      "count": 4596
     },
     {
       "step": "스크롤 5% 이상",
-      "count": 1784
+      "count": 1809
     },
     {
       "step": "쿠폰 모달 오픈",
-      "count": 2002
+      "count": 2004
     },
     {
       "step": "마스터패키지(LDM6)",
-      "count": 1065
+      "count": 1042
     },
     {
       "step": "결제 상세(/payment)",
-      "count": 357
+      "count": 345
     },
     {
       "step": "결제 완료",
-      "count": 52
+      "count": 47
     }
   ],
   "ldm7Behavior": [
     {
       "action": "/ldm/6",
-      "count": 604
+      "count": 589
     },
     {
       "action": "/signin",
-      "count": 333
+      "count": 338
     },
     {
       "action": "/free-trial",
-      "count": 188
+      "count": 199
     },
     {
       "action": "/",
-      "count": 33
+      "count": 34
     },
     {
       "action": "/offerings/master/package",
-      "count": 29
-    },
-    {
-      "action": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
-      "count": 19
+      "count": 30
     },
     {
       "action": "/courses",
-      "count": 18
+      "count": 21
+    },
+    {
+      "action": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
+      "count": 16
     },
     {
       "action": "/about",
@@ -159,35 +159,35 @@
   "tossPages": [
     {
       "page": "/ldm/6",
-      "count": 123
+      "count": 84
     },
     {
       "page": "/offerings/master/package",
-      "count": 58
+      "count": 51
     },
     {
       "page": "/products",
-      "count": 31
+      "count": 30
     },
     {
       "page": "/ldm/7",
-      "count": 22
+      "count": 28
     },
     {
       "page": "/courses",
       "count": 15
     },
     {
-      "page": "/web-view/ldm/7",
-      "count": 14
-    },
-    {
-      "page": "/oAuth/kakao",
-      "count": 13
-    },
-    {
       "page": "/",
       "count": 13
+    },
+    {
+      "page": "/web-view/ldm/7",
+      "count": 12
+    },
+    {
+      "page": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
+      "count": 11
     }
   ]
 }
