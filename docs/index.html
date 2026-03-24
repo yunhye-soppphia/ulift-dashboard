@@ -75,11 +75,14 @@ html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:var(
 .kpi-delta.dn{background:var(--red-light);color:var(--red);}
 
 /* ── DAU CHART ── */
-.dau-wrap{display:flex;align-items:flex-end;gap:3px;height:90px;padding-top:4px;}
-.b-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;}
-.b-bar{width:100%;border-radius:3px 3px 0 0;background:var(--blue);opacity:.55;transition:opacity .15s;min-height:3px;cursor:default;}
+.dau-wrap{display:flex;align-items:flex-end;gap:6px;height:160px;padding-top:4px;}
+.b-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;height:100%;}
+.b-bar{width:100%;border-radius:4px 4px 0 0;background:var(--blue);opacity:.5;transition:opacity .2s;min-height:3px;cursor:default;}
 .b-bar:hover{opacity:1;}
-.b-lbl{font-family:var(--mono);font-size:9px;color:var(--ink3);white-space:nowrap;}
+.b-count{font-family:var(--mono);font-size:10px;color:var(--blue);font-weight:600;margin-bottom:2px;}
+.b-lbl-wrap{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:4px;}
+.b-lbl-day{font-family:var(--mono);font-size:10px;color:var(--ink);font-weight:600;}
+.b-lbl-date{font-family:var(--mono);font-size:9px;color:var(--ink3);}
 
 /* ── COURSE LIST ── */
 .c-list{display:flex;flex-direction:column;gap:9px;}
