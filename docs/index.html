@@ -265,7 +265,17 @@ function renderDAU(d){
   var max=Math.max.apply(null,d.dau.map(function(x){return x.count;}));
   el.innerHTML=d.dau.map(function(item){
     var h=max?Math.max(4,(item.count/max*100)):4;
-    return '<div class="b-col"><div class="b-bar" style="height:'+h+'%" title="'+item.date+' · '+fmt(item.count)+'명"></div><div class="b-lbl">'+item.date.slice(5)+'</div></div>';
+    var days=['일','월','화','수','목','금','토'];
+    var dayName=days[new Date(item.date).getDay()];
+    var isWeekend=dayName==='토'||dayName==='일';
+    var color=isWeekend?'var(--orange)':'var(--blue)';
+    return '<div class="b-col">'
+      +'<div class="b-count">'+fmt(item.count)+'</div>'
+      +'<div class="b-bar" style="height:'+h+'%;background:'+color+'" title="'+item.date+' · '+fmt(item.count)+'명"></div>'
+      +'<div class="b-lbl-wrap">'
+      +'<div class="b-lbl-day" style="color:'+(isWeekend?'var(--orange)':'var(--ink)')+'">'+dayName+'</div>'
+      +'<div class="b-lbl-date">'+item.date.slice(5)+'</div>'
+      +'</div></div>';
   }).join('');
 }
 
