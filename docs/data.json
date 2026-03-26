@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-03-26T12:38:11.590Z",
+    "updatedAt": "2026-03-26T12:42:00.916Z",
     "from": "2026-03-19",
     "to": "2026-03-25",
     "fetchDays": 7
@@ -63,7 +63,7 @@
   "topCourses": [
     {
       "course": "파이썬 첫걸음",
-      "count": 2217
+      "count": 2219
     },
     {
       "course": "Gemini 완전 정복",
@@ -105,15 +105,15 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 398
+      "count": 401
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 206
+      "count": 208
     },
     {
       "course": "AI 마케팅",
-      "count": 124
+      "count": 122
     },
     {
       "course": "Claude MCP 활용",
@@ -128,7 +128,7 @@
       "count": 32
     },
     {
-      "course": "AI 바이브 코딩(파이썬)",
+      "course": "파이썬 AI 주식 분석",
       "count": 32
     },
     {
@@ -136,12 +136,12 @@
       "count": 32
     },
     {
-      "course": "파이썬 AI 주식 분석",
+      "course": "AI 바이브 코딩(파이썬)",
       "count": 32
     },
     {
       "course": "수익형 웹 서비스 입문",
-      "count": 15
+      "count": 16
     }
   ],
   "cohort": {
