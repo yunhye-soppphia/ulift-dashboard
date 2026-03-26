@@ -1,53 +1,119 @@
 {
   "meta": {
-    "updatedAt": "2026-03-26T12:15:24.807Z",
+    "updatedAt": "2026-03-26T12:26:02.258Z",
     "from": "2026-03-19",
     "to": "2026-03-25",
     "fetchDays": 7
   },
-  "mau": 7706,
+  "mau": 7712,
   "dau": [
     {
       "date": "2026-03-19",
-      "count": 2428
+      "count": 2432
     },
     {
       "date": "2026-03-20",
-      "count": 994
+      "count": 996
     },
     {
       "date": "2026-03-21",
-      "count": 992
+      "count": 994
     },
     {
       "date": "2026-03-22",
-      "count": 1061
+      "count": 1062
     },
     {
       "date": "2026-03-23",
-      "count": 1132
+      "count": 1134
     },
     {
       "date": "2026-03-24",
-      "count": 1168
+      "count": 1169
     },
     {
       "date": "2026-03-25",
-      "count": 1266
+      "count": 1267
+    }
+  ],
+  "paidCount": 337,
+  "retention": {
+    "d3Rate": 84.4,
+    "d7Rate": 84.4,
+    "base": 45,
+    "d3Count": 38,
+    "d7Count": 38
+  },
+  "paidMetrics": {
+    "avgWeeklyVisit": 17.2,
+    "avgDailyStudyMin": 4.7,
+    "avgDailyCells": 7,
+    "badgeRate": 12.8,
+    "badgeUidCount": 43
+  },
+  "retentionImprove": {
+    "first3DayRate": 66.7,
+    "first3DayCount": 30,
+    "deepLearningRate": 71.5,
+    "deepLearningCount": 241,
+    "quickReturnRate": 1.7,
+    "quickReturnCount": 5,
+    "quickReturnBase": 290
+  },
+  "topCourses": [
+    {
+      "course": "파이썬 첫걸음",
+      "count": 2217
+    },
+    {
+      "course": "Gemini 완전 정복",
+      "count": 1435
+    },
+    {
+      "course": "AI 업무 꿀팁",
+      "count": 1204
+    },
+    {
+      "course": "Nano Banana 완전 정복",
+      "count": 945
+    },
+    {
+      "course": "Claude Code 입문",
+      "count": 820
+    },
+    {
+      "course": "n8n 업무 자동화 입문",
+      "count": 731
+    },
+    {
+      "course": "Claude MCP 활용",
+      "count": 696
+    },
+    {
+      "course": "ChatGPT 완전 정복",
+      "count": 680
+    },
+    {
+      "course": "웹 개발의 시작 HTML",
+      "count": 632
+    },
+    {
+      "course": "파이썬 GPT 업무 자동화",
+      "count": 570
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 396
+      "count": 397
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 208
+      "count": 207
     },
     {
       "course": "AI 마케팅",
-      "count": 124
+      "count": 122
     },
     {
       "course": "Claude MCP 활용",
@@ -58,14 +124,6 @@
       "count": 68
     },
     {
-      "course": "n8n 업무 자동화 입문",
-      "count": 32
-    },
-    {
-      "course": "AI 바이브 코딩(파이썬)",
-      "count": 32
-    },
-    {
       "course": "파이썬 첫걸음",
       "count": 32
     },
@@ -74,8 +132,16 @@
       "count": 32
     },
     {
+      "course": "n8n 업무 자동화 입문",
+      "count": 32
+    },
+    {
+      "course": "AI 바이브 코딩(파이썬)",
+      "count": 32
+    },
+    {
       "course": "수익형 웹 서비스 입문",
-      "count": 16
+      "count": 15
     }
   ],
   "cohort": {
@@ -99,95 +165,29 @@
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 4475
+      "count": 0
     },
     {
       "step": "스크롤 5% 이상",
-      "count": 1768
+      "count": 0
     },
     {
       "step": "쿠폰 모달 오픈",
-      "count": 1591
+      "count": 0
     },
     {
       "step": "마스터패키지(LDM6)",
-      "count": 733
+      "count": 0
     },
     {
       "step": "결제 상세(/payment)",
-      "count": 233
+      "count": 0
     },
     {
       "step": "결제 완료",
       "count": 45
     }
   ],
-  "ldm7Behavior": [
-    {
-      "action": "/ldm/6",
-      "count": 595
-    },
-    {
-      "action": "/signin",
-      "count": 352
-    },
-    {
-      "action": "/free-trial",
-      "count": 184
-    },
-    {
-      "action": "/",
-      "count": 36
-    },
-    {
-      "action": "/offerings/master/package",
-      "count": 24
-    },
-    {
-      "action": "/courses",
-      "count": 21
-    },
-    {
-      "action": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
-      "count": 12
-    },
-    {
-      "action": "/products",
-      "count": 8
-    }
-  ],
-  "tossPages": [
-    {
-      "page": "/ldm/6",
-      "count": 99
-    },
-    {
-      "page": "/offerings/master/package",
-      "count": 41
-    },
-    {
-      "page": "/ldm/7",
-      "count": 32
-    },
-    {
-      "page": "/products",
-      "count": 26
-    },
-    {
-      "page": "/courses",
-      "count": 19
-    },
-    {
-      "page": "/",
-      "count": 13
-    },
-    {
-      "page": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
-      "count": 11
-    },
-    {
-      "page": "/web-view/ldm/7",
-      "count": 8
-    }
-  ]
+  "ldm7Behavior": [],
+  "tossPages": []
 }
