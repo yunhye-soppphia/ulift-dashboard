@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-03-26T05:52:30.491Z",
+    "updatedAt": "2026-03-26T11:52:33.621Z",
     "from": "2026-03-19",
     "to": "2026-03-25",
     "fetchDays": 7
@@ -29,7 +29,7 @@
     },
     {
       "date": "2026-03-24",
-      "count": 1169
+      "count": 1168
     },
     {
       "date": "2026-03-25",
@@ -39,11 +39,11 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 397
+      "count": 396
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 207
+      "count": 208
     },
     {
       "course": "AI 마케팅",
@@ -51,18 +51,14 @@
     },
     {
       "course": "Claude MCP 활용",
-      "count": 103
+      "count": 104
     },
     {
       "course": "Gemini 완전 정복",
       "count": 68
     },
     {
-      "course": "AI 바이브 코딩(파이썬)",
-      "count": 32
-    },
-    {
-      "course": "파이썬 AI 주식 분석",
+      "course": "n8n 업무 자동화 입문",
       "count": 32
     },
     {
@@ -70,12 +66,16 @@
       "count": 32
     },
     {
-      "course": "n8n 업무 자동화 입문",
+      "course": "파이썬 AI 주식 분석",
+      "count": 32
+    },
+    {
+      "course": "AI 바이브 코딩(파이썬)",
       "count": 31
     },
     {
       "course": "수익형 웹 서비스 입문",
-      "count": 16
+      "count": 15
     }
   ],
   "cohort": {
@@ -99,7 +99,7 @@
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 4474
+      "count": 4475
     },
     {
       "step": "스크롤 5% 이상",
