@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-03-26T12:31:32.377Z",
+    "updatedAt": "2026-03-26T12:38:11.590Z",
     "from": "2026-03-19",
     "to": "2026-03-25",
     "fetchDays": 7
@@ -63,11 +63,11 @@
   "topCourses": [
     {
       "course": "파이썬 첫걸음",
-      "count": 2218
+      "count": 2217
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 1435
+      "count": 1437
     },
     {
       "course": "AI 업무 꿀팁",
@@ -83,7 +83,7 @@
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 732
+      "count": 731
     },
     {
       "course": "Claude MCP 활용",
@@ -95,7 +95,7 @@
     },
     {
       "course": "웹 개발의 시작 HTML",
-      "count": 630
+      "count": 632
     },
     {
       "course": "파이썬 GPT 업무 자동화",
@@ -105,15 +105,15 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 396
+      "count": 398
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 208
+      "count": 206
     },
     {
       "course": "AI 마케팅",
-      "count": 123
+      "count": 124
     },
     {
       "course": "Claude MCP 활용",
@@ -124,11 +124,11 @@
       "count": 67
     },
     {
-      "course": "AI 바이브 코딩(파이썬)",
+      "course": "n8n 업무 자동화 입문",
       "count": 32
     },
     {
-      "course": "n8n 업무 자동화 입문",
+      "course": "AI 바이브 코딩(파이썬)",
       "count": 32
     },
     {
