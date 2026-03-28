@@ -77,8 +77,15 @@ function processEvent(ev) {
   userMap[uid].events.push({
     event     : ev.event,
     time      : (props.time || 0) * 1000,
-    url       : props.cep_url_path || props.current_url || '',
-    scrollPct : props['$mp_scroll_percentage'] || 0,
+    url       : (function(){
+      var raw = props.cep_url_path || props.current_url || props['$current_url'] || '';
+      return raw.replace(/https?:\/\/[^/]+/, '').split('?')[0].split('#')[0] || '/';
+    })(),
+    rawUrl    : (function(){
+      var raw = props['$current_url'] || props.current_url || props.cep_url_path || '';
+      return raw.replace(/https?:\/\/[^/]+/, '').split('?')[0].split('#')[0] || '/';
+    })(),
+    scrollPct : props['$mp_scroll_percentage'] || props['[Auto] Scroll Percentage'] || props.mp_scroll_percentage || props['$mp_scroll_depth'] || 0,
     courseName: props.course_name || '',
     cellName  : props.cell_name || '',
     studyType : props.study_type || '',
@@ -293,36 +300,52 @@ function analyze(from, to) {
   }
 
   // 퍼널
+  // 퍼널 — 각 단계 독립적으로 카운트 (LDM7 방문 이후 발생한 것만)
   var ldm7Visit=0,ldm7Scroll5=0,couponModal=0,ldm6Visit=0,paymentVisit=0;
   allUids.forEach(function(uid){
     var evs=userMap[uid].events;
+
+    // 1단계: LDM7 방문
     var ldm7Time=-1;
-    for(var i=0;i<evs.length;i++){if(evs[i].url.indexOf('/ldm/7')!==-1){ldm7Time=evs[i].time;break;}}
-    if(ldm7Time===-1)return;
-    ldm7Visit++;
-    var scroll5Time=-1;
     for(var i=0;i<evs.length;i++){
-      if(evs[i].time<ldm7Time)continue;
-      if(evs[i].url.indexOf('/ldm/7')!==-1&&evs[i].event==='$mp_scroll'&&evs[i].scrollPct>=5){scroll5Time=evs[i].time;break;}
+      if(evs[i].url.indexOf('/ldm/7')!==-1){ldm7Time=evs[i].time;break;}
     }
-    if(scroll5Time===-1)return;
-    ldm7Scroll5++;
-    var couponTime=-1;
+    if(ldm7Time===-1) return;
+    ldm7Visit++;
+
+    // 2단계: LDM7 방문 이후 스크롤 5% (독립)
     for(var i=0;i<evs.length;i++){
-      if(evs[i].time<ldm7Time)continue;
-      if(evs[i].event==='web_open_coupon_modal'){
-        var lastPg='';
-        for(var k=i-1;k>=0;k--){if(evs[k].event==='$mp_web_page_view'){lastPg=evs[k].url;break;}}
-        if(lastPg.indexOf('/ldm/7')!==-1){couponTime=evs[i].time;break;}
+      if(evs[i].time<ldm7Time) continue;
+      var scrollUrl = evs[i].url || evs[i].rawUrl || '';
+      if((scrollUrl.indexOf('/ldm/7')!==-1) && evs[i].event==='$mp_scroll' && evs[i].scrollPct>=5){
+        ldm7Scroll5++;
+        break;
       }
     }
-    if(couponTime===-1)return;
-    couponModal++;
-    var ldm6Time=-1;
-    for(var i=0;i<evs.length;i++){if(evs[i].time<ldm7Time)continue;if(evs[i].url.indexOf('/ldm/6')!==-1){ldm6Time=evs[i].time;break;}}
-    if(ldm6Time===-1)return;
-    ldm6Visit++;
-    for(var i=0;i<evs.length;i++){if(evs[i].time<ldm7Time)continue;if(evs[i].url.indexOf('/payment')!==-1){paymentVisit++;break;}}
+
+    // 3단계: LDM7 방문 이후 쿠폰 모달 (LDM7 페이지에서 열린 것만)
+    for(var i=0;i<evs.length;i++){
+      if(evs[i].time<ldm7Time) continue;
+      if(evs[i].event==='web_open_coupon_modal'){
+        var lastPg='';
+        for(var k=i-1;k>=0;k--){
+          if(evs[k].event==='$mp_web_page_view'){lastPg=evs[k].url;break;}
+        }
+        if(lastPg.indexOf('/ldm/7')!==-1){couponModal++;break;}
+      }
+    }
+
+    // 4단계: LDM7 방문 이후 LDM6 방문 (독립)
+    for(var i=0;i<evs.length;i++){
+      if(evs[i].time<ldm7Time) continue;
+      if(evs[i].url.indexOf('/ldm/6')!==-1){ldm6Visit++;break;}
+    }
+
+    // 5단계: LDM7 방문 이후 결제 상세 (독립)
+    for(var i=0;i<evs.length;i++){
+      if(evs[i].time<ldm7Time) continue;
+      if(evs[i].url.indexOf('/payment')!==-1){paymentVisit++;break;}
+    }
   });
 
   // LDM7 다음 행동 + 체류시간
@@ -441,7 +464,6 @@ function analyze(from, to) {
     },
     funnel:[
       {step:'LDM7 방문',count:ldm7Visit},
-      {step:'스크롤 5% 이상',count:ldm7Scroll5},
       {step:'쿠폰 모달 오픈',count:couponModal},
       {step:'마스터패키지(LDM6)',count:ldm6Visit},
       {step:'결제 상세(/payment)',count:paymentVisit},
