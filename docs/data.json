@@ -1,12 +1,64 @@
 {
   "meta": {
-    "updatedAt": "2026-03-28T05:16:02.965Z",
-    "from": "2026-03-21",
+    "updatedAt": "2026-03-28T08:14:39.897Z",
+    "from": "2026-03-08",
     "to": "2026-03-27",
-    "fetchDays": 7
+    "fetchDays": 20
   },
-  "mau": 7237,
+  "mau": 20531,
   "dau": [
+    {
+      "date": "2026-03-08",
+      "count": 1462
+    },
+    {
+      "date": "2026-03-09",
+      "count": 1295
+    },
+    {
+      "date": "2026-03-10",
+      "count": 1093
+    },
+    {
+      "date": "2026-03-11",
+      "count": 1691
+    },
+    {
+      "date": "2026-03-12",
+      "count": 1615
+    },
+    {
+      "date": "2026-03-13",
+      "count": 1439
+    },
+    {
+      "date": "2026-03-14",
+      "count": 921
+    },
+    {
+      "date": "2026-03-15",
+      "count": 1220
+    },
+    {
+      "date": "2026-03-16",
+      "count": 1140
+    },
+    {
+      "date": "2026-03-17",
+      "count": 1164
+    },
+    {
+      "date": "2026-03-18",
+      "count": 1547
+    },
+    {
+      "date": "2026-03-19",
+      "count": 2431
+    },
+    {
+      "date": "2026-03-20",
+      "count": 996
+    },
     {
       "date": "2026-03-21",
       "count": 994
@@ -21,11 +73,11 @@
     },
     {
       "date": "2026-03-24",
-      "count": 1167
+      "count": 1168
     },
     {
       "date": "2026-03-25",
-      "count": 1274
+      "count": 1275
     },
     {
       "date": "2026-03-26",
@@ -33,134 +85,134 @@
     },
     {
       "date": "2026-03-27",
-      "count": 1407
+      "count": 1408
     }
   ],
-  "paidCount": 314,
+  "paidCount": 648,
   "retention": {
-    "d3Rate": 78.4,
-    "d7Rate": 81.1,
-    "base": 37,
-    "d3Count": 29,
-    "d7Count": 30
+    "d3Rate": 79.7,
+    "d7Rate": 82,
+    "base": 128,
+    "d3Count": 102,
+    "d7Count": 105
   },
   "paidMetrics": {
-    "avgWeeklyVisit": 17.3,
-    "avgDailyStudyMin": 4.8,
-    "avgDailyCells": 7.6,
-    "badgeRate": 30.9,
-    "badgeUidCount": 97
+    "avgWeeklyVisit": 14.8,
+    "avgDailyStudyMin": 4.4,
+    "avgDailyCells": 5.9,
+    "badgeRate": 19.8,
+    "badgeUidCount": 128
   },
   "retentionImprove": {
-    "first3DayRate": 67.6,
-    "first3DayCount": 25,
-    "deepLearningRate": 70.1,
-    "deepLearningCount": 220,
-    "quickReturnRate": 1.1,
-    "quickReturnCount": 3,
-    "quickReturnBase": 269
+    "first3DayRate": 64.1,
+    "first3DayCount": 82,
+    "deepLearningRate": 82.3,
+    "deepLearningCount": 533,
+    "quickReturnRate": 0.9,
+    "quickReturnCount": 5,
+    "quickReturnBase": 538
   },
   "topCourses": [
     {
       "course": "파이썬 첫걸음",
-      "count": 1613
+      "count": 9880
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 1606
+      "count": 6794
     },
     {
       "course": "AI 업무 꿀팁",
-      "count": 1242
+      "count": 5831
     },
     {
       "course": "Nano Banana 완전 정복",
-      "count": 1156
+      "count": 4815
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 864
-    },
-    {
-      "course": "n8n 업무 자동화 입문",
-      "count": 845
-    },
-    {
-      "course": "Claude Code 입문",
-      "count": 754
-    },
-    {
-      "course": "파이썬 핸즈온 초급",
-      "count": 734
+      "count": 4423
     },
     {
       "course": "Claude MCP 활용",
-      "count": 676
+      "count": 3077
+    },
+    {
+      "course": "Claude Code 입문",
+      "count": 2999
+    },
+    {
+      "course": "파이썬 핸즈온 중급",
+      "count": 2260
     },
     {
       "course": "웹 개발의 시작 HTML",
-      "count": 631
+      "count": 2223
+    },
+    {
+      "course": "SQL 첫걸음",
+      "count": 2134
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 342
+      "count": 1599
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 167
-    },
-    {
-      "course": "Claude MCP 활용",
-      "count": 124
+      "count": 668
     },
     {
       "course": "AI 마케팅",
-      "count": 124
+      "count": 653
+    },
+    {
+      "course": "Claude MCP 활용",
+      "count": 536
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 56
-    },
-    {
-      "course": "AI 바이브 코딩(파이썬)",
-      "count": 39
-    },
-    {
-      "course": "파이썬 AI 주식 분석",
-      "count": 32
+      "count": 258
     },
     {
       "course": "파이썬 첫걸음",
-      "count": 32
+      "count": 225
+    },
+    {
+      "course": "AI 바이브 코딩(파이썬)",
+      "count": 163
+    },
+    {
+      "course": "파이썬 AI 주식 분석",
+      "count": 155
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 32
+      "count": 126
     },
     {
       "course": "수익형 웹 서비스 입문",
-      "count": 28
+      "count": 99
     }
   ],
   "cohort": {
     "trial": {
-      "count": 7,
-      "medianTime": 52110000,
-      "meanTime": 61593833,
-      "couponRate": 85.7,
-      "avgVisits": 212.6
+      "count": 22,
+      "medianTime": 30520000,
+      "meanTime": 133199158,
+      "couponRate": 100,
+      "avgVisits": 793.1
     },
     "direct": {
-      "count": 30,
-      "medianTime": 568000,
-      "meanTime": 9043412,
-      "couponRate": 80,
-      "avgVisits": 211.7
+      "count": 106,
+      "medianTime": 1428000,
+      "meanTime": 32588567,
+      "couponRate": 78.3,
+      "avgVisits": 311.9
     },
-    "trialConversionRate": 5.2,
-    "totalTrialUsers": 134
+    "trialConversionRate": 5,
+    "totalTrialUsers": 438
   },
   "funnel": [
     {
@@ -185,7 +237,7 @@
     },
     {
       "step": "결제 완료",
-      "count": 37
+      "count": 128
     }
   ],
   "ldm7Behavior": [],
