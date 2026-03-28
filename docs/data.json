@@ -1,16 +1,12 @@
 {
   "meta": {
-    "updatedAt": "2026-03-27T05:53:00.306Z",
-    "from": "2026-03-20",
-    "to": "2026-03-26",
+    "updatedAt": "2026-03-28T05:16:02.965Z",
+    "from": "2026-03-21",
+    "to": "2026-03-27",
     "fetchDays": 7
   },
-  "mau": 6840,
+  "mau": 7237,
   "dau": [
-    {
-      "date": "2026-03-20",
-      "count": 996
-    },
     {
       "date": "2026-03-21",
       "count": 994
@@ -25,142 +21,146 @@
     },
     {
       "date": "2026-03-24",
-      "count": 1168
+      "count": 1167
     },
     {
       "date": "2026-03-25",
-      "count": 1272
+      "count": 1274
     },
     {
       "date": "2026-03-26",
-      "count": 1514
+      "count": 1515
+    },
+    {
+      "date": "2026-03-27",
+      "count": 1407
     }
   ],
-  "paidCount": 325,
+  "paidCount": 314,
   "retention": {
-    "d3Rate": 81.6,
-    "d7Rate": 84.2,
-    "base": 38,
-    "d3Count": 31,
-    "d7Count": 32
+    "d3Rate": 78.4,
+    "d7Rate": 81.1,
+    "base": 37,
+    "d3Count": 29,
+    "d7Count": 30
   },
   "paidMetrics": {
-    "avgWeeklyVisit": 21.3,
-    "avgDailyStudyMin": 4.7,
-    "avgDailyCells": 9.2,
-    "badgeRate": 22.8,
-    "badgeUidCount": 74
+    "avgWeeklyVisit": 17.3,
+    "avgDailyStudyMin": 4.8,
+    "avgDailyCells": 7.6,
+    "badgeRate": 30.9,
+    "badgeUidCount": 97
   },
   "retentionImprove": {
-    "first3DayRate": 60.5,
-    "first3DayCount": 23,
-    "deepLearningRate": 83.1,
-    "deepLearningCount": 270,
-    "quickReturnRate": 1.5,
-    "quickReturnCount": 4,
-    "quickReturnBase": 274
+    "first3DayRate": 67.6,
+    "first3DayCount": 25,
+    "deepLearningRate": 70.1,
+    "deepLearningCount": 220,
+    "quickReturnRate": 1.1,
+    "quickReturnCount": 3,
+    "quickReturnBase": 269
   },
   "topCourses": [
     {
       "course": "파이썬 첫걸음",
-      "count": 2209
+      "count": 1613
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 1940
+      "count": 1606
     },
     {
       "course": "AI 업무 꿀팁",
-      "count": 1439
+      "count": 1242
     },
     {
       "course": "Nano Banana 완전 정복",
-      "count": 1367
-    },
-    {
-      "course": "n8n 업무 자동화 입문",
-      "count": 1062
+      "count": 1156
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 1050
+      "count": 864
     },
     {
-      "course": "Claude MCP 활용",
-      "count": 979
+      "course": "n8n 업무 자동화 입문",
+      "count": 845
     },
     {
       "course": "Claude Code 입문",
-      "count": 975
+      "count": 754
     },
     {
       "course": "파이썬 핸즈온 초급",
-      "count": 808
+      "count": 734
+    },
+    {
+      "course": "Claude MCP 활용",
+      "count": 676
     },
     {
       "course": "웹 개발의 시작 HTML",
-      "count": 753
+      "count": 631
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 433
+      "count": 342
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 213
-    },
-    {
-      "course": "AI 마케팅",
-      "count": 135
+      "count": 167
     },
     {
       "course": "Claude MCP 활용",
-      "count": 110
+      "count": 124
+    },
+    {
+      "course": "AI 마케팅",
+      "count": 124
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 75
+      "count": 56
     },
     {
       "course": "AI 바이브 코딩(파이썬)",
-      "count": 44
-    },
-    {
-      "course": "파이썬 AI 주식 분석",
-      "count": 40
-    },
-    {
-      "course": "파이썬 첫걸음",
       "count": 39
     },
     {
+      "course": "파이썬 AI 주식 분석",
+      "count": 32
+    },
+    {
+      "course": "파이썬 첫걸음",
+      "count": 32
+    },
+    {
       "course": "n8n 업무 자동화 입문",
-      "count": 35
+      "count": 32
     },
     {
       "course": "수익형 웹 서비스 입문",
-      "count": 30
+      "count": 28
     }
   ],
   "cohort": {
     "trial": {
       "count": 7,
-      "medianTime": 47733000,
-      "meanTime": 59613714,
-      "couponRate": 100,
-      "avgVisits": 277.1
+      "medianTime": 52110000,
+      "meanTime": 61593833,
+      "couponRate": 85.7,
+      "avgVisits": 212.6
     },
     "direct": {
-      "count": 31,
-      "medianTime": 1252500,
-      "meanTime": 7948625,
-      "couponRate": 74.2,
-      "avgVisits": 208
+      "count": 30,
+      "medianTime": 568000,
+      "meanTime": 9043412,
+      "couponRate": 80,
+      "avgVisits": 211.7
     },
-    "trialConversionRate": 5.3,
-    "totalTrialUsers": 132
+    "trialConversionRate": 5.2,
+    "totalTrialUsers": 134
   },
   "funnel": [
     {
@@ -185,7 +185,7 @@
     },
     {
       "step": "결제 완료",
-      "count": 38
+      "count": 37
     }
   ],
   "ldm7Behavior": [],
