@@ -233,14 +233,30 @@ function analyze(from, to) {
   });
   var deepLearningRate = paidUids.length ? +(deepLearningUids/paidUids.length*100).toFixed(1) : 0;
 
-  // 첫 학습 후 다음 학습까지 리드타임 3일 이내 비율
+  // 첫 학습 후 3일 내 재학습 비율
+  // - 분모: 첫 학습이 데이터 종료 3일 전 이전인 유저 (3일이 지난 유저만)
+  // - 분자: 그 중 3일 내 두 번째 학습이 있는 유저
   var quickReturnCount = 0, quickReturnBase = 0;
+  var toTime = new Date(to + 'T23:59:59Z').getTime();
+  var cutoffTime = toTime - D3; // 마지막 날 - 3일
+
   paidUids.forEach(function(uid) {
-    var evs = userMap[uid].events.filter(function(e){ return e.event==='app_start_cell'; });
-    if (evs.length < 2) return;
+    var cellEvs = userMap[uid].events.filter(function(e){ return e.event==='app_start_cell'; });
+    if (cellEvs.length < 1) return;
+
+    var firstStudyTime = cellEvs[0].time;
+
+    // 첫 학습이 cutoff 이후면 3일이 아직 안 지났으므로 제외
+    if (firstStudyTime > cutoffTime) return;
     quickReturnBase++;
-    var diff = evs[1].time - evs[0].time;
-    if (diff > 0 && diff <= D3) quickReturnCount++;
+
+    // 첫 학습 후 3일 내 두 번째 학습이 있는지 확인
+    var hasReturn = cellEvs.some(function(e, idx) {
+      if (idx === 0) return false;
+      var diff = e.time - firstStudyTime;
+      return diff > 0 && diff <= D3;
+    });
+    if (hasReturn) quickReturnCount++;
   });
   var quickReturnRate = quickReturnBase ? +(quickReturnCount/quickReturnBase*100).toFixed(1) : 0;
 

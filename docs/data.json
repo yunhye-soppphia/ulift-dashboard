@@ -1,11 +1,11 @@
 {
   "meta": {
-    "updatedAt": "2026-03-28T09:11:50.685Z",
+    "updatedAt": "2026-03-28T09:54:15.069Z",
     "from": "2026-03-08",
     "to": "2026-03-27",
     "fetchDays": 20
   },
-  "mau": 20531,
+  "mau": 20533,
   "dau": [
     {
       "date": "2026-03-08",
@@ -81,7 +81,7 @@
     },
     {
       "date": "2026-03-26",
-      "count": 1515
+      "count": 1517
     },
     {
       "date": "2026-03-27",
@@ -108,9 +108,9 @@
     "first3DayCount": 82,
     "deepLearningRate": 82.3,
     "deepLearningCount": 533,
-    "quickReturnRate": 0.9,
-    "quickReturnCount": 5,
-    "quickReturnBase": 538
+    "quickReturnRate": 84.4,
+    "quickReturnCount": 421,
+    "quickReturnBase": 499
   },
   "topCourses": [
     {
@@ -119,7 +119,7 @@
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 6795
+      "count": 6797
     },
     {
       "course": "AI 업무 꿀팁",
@@ -131,11 +131,11 @@
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 4423
+      "count": 4425
     },
     {
       "course": "Claude MCP 활용",
-      "count": 3077
+      "count": 3076
     },
     {
       "course": "Claude Code 입문",
@@ -143,11 +143,11 @@
     },
     {
       "course": "파이썬 핸즈온 중급",
-      "count": 2256
+      "count": 2260
     },
     {
       "course": "웹 개발의 시작 HTML",
-      "count": 2222
+      "count": 2223
     },
     {
       "course": "SQL 첫걸음",
@@ -157,7 +157,7 @@
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 1598
+      "count": 1596
     },
     {
       "course": "ChatGPT 완전 정복",
@@ -165,7 +165,7 @@
     },
     {
       "course": "AI 마케팅",
-      "count": 652
+      "count": 650
     },
     {
       "course": "Claude MCP 활용",
@@ -173,7 +173,7 @@
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 257
+      "count": 259
     },
     {
       "course": "파이썬 첫걸음",
@@ -181,15 +181,15 @@
     },
     {
       "course": "AI 바이브 코딩(파이썬)",
-      "count": 166
+      "count": 163
     },
     {
       "course": "파이썬 AI 주식 분석",
-      "count": 156
+      "count": 155
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 126
+      "count": 125
     },
     {
       "course": "수익형 웹 서비스 입문",
@@ -212,7 +212,7 @@
       "avgVisits": 311.9
     },
     "trialConversionRate": 5,
-    "totalTrialUsers": 438
+    "totalTrialUsers": 439
   },
   "funnel": [
     {
@@ -310,14 +310,14 @@
       "avgDuration": 10000
     },
     {
-      "page": "/account/membership",
-      "count": 9,
-      "avgDuration": 8000
-    },
-    {
       "page": "/offerings/cmlz0r8pg00bf0715e0jv8fxa",
       "count": 9,
       "avgDuration": 2000
+    },
+    {
+      "page": "/account/membership",
+      "count": 9,
+      "avgDuration": 8000
     }
   ]
 }
