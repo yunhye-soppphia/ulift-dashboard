@@ -105,6 +105,60 @@ function processEvent(ev) {
   dauMap[day].add(uid);
 }
 
+
+// ── 코스 URL → 코스명 매핑 ──────────────────────────────────
+var COURSE_MAP = {
+  '/course/AI-%EC%97%85%EB%AC%B4-%EA%BF%80%ED%8C%81': 'AI 업무 꿀팁',
+  '/course/ChatGPT-%EC%99%84%EC%A0%84-%EC%A0%95%EB%B3%B5': 'ChatGPT 완전 정복',
+  '/course/Gemini-%EC%99%84%EC%A0%84-%EC%A0%95%EB%B3%B5': 'Gemini 완전 정복',
+  '/course/Claude-MCP-%ED%99%9C%EC%9A%A9': 'Claude MCP 활용',
+  '/course/Nano-Banana-%EC%99%84%EC%A0%84-%EC%A0%95%EB%B3%B5': 'Nano Banana 완전 정복',
+  '/course/AI-%EB%A7%88%EC%BC%80%ED%8C%85': 'AI 마케팅',
+  '/course/AI-%EC%84%B8%EC%9D%BC%EC%A6%88': 'AI 세일즈',
+  '/course/AI-%ED%95%B4%EC%99%B8%EC%97%AC%ED%96%89': 'AI 해외여행',
+  '/course/AI-%ED%94%84%EB%A0%88%EC%A0%A0%ED%85%8C%EC%9D%B4%EC%85%98': 'AI 프레젠테이션',
+  '/course/AI-%EB%B0%94%EC%9D%B4%EB%B8%8C-%EC%BD%94%EB%94%A9-%ED%8C%8C%EC%9D%B4%EC%8D%AC': 'AI 바이브 코딩 파이썬',
+  '/course/GPT-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81': 'GPT 프롬프트 엔지니어링',
+  '/course/Claude-Code-%EC%9E%85%EB%AC%B8': 'Claude Code 입문',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-GPT-%EC%97%85%EB%AC%B4-%EC%9E%90%EB%8F%99%ED%99%94': '파이썬 GPT 업무 자동화',
+  '/course/n8n-%EC%97%85%EB%AC%B4-%EC%9E%90%EB%8F%99%ED%99%94-%EC%9E%85%EB%AC%B8': 'n8n 업무 자동화 입문',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-AI-%EC%A3%BC%EC%8B%9D-%EB%B6%84%EC%84%9D': '파이썬 AI 주식 분석',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-AI-ETF-%EB%B6%84%EC%84%9D-%EC%9E%85%EB%AC%B8': '파이썬 AI ETF 분석 입문',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%B2%AB%EA%B1%B8%EC%9D%8C': '파이썬 첫걸음',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%8F%84%EC%95%BD': '파이썬 도약',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%8B%AC%ED%99%94': '파이썬 심화',
+  '/course/SQL-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'SQL 첫걸음',
+  '/course/SQL-%ED%95%B8%EC%A6%88%EC%98%A8': 'SQL 핸즈온',
+  '/course/SQL-%EC%8B%AC%ED%99%94': 'SQL 심화',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%97%85%EB%AC%B4-%EC%9E%90%EB%8F%99%ED%99%94-%EC%9E%85%EB%AC%B8': '파이썬 업무 자동화 입문',
+  '/course/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D-%EC%9E%85%EB%AC%B8': '파이썬 데이터 분석 입문',
+  '/course/%EC%9B%B9-%EA%B0%9C%EB%B0%9C%EC%9D%98-%EC%8B%9C%EC%9E%91-HTML': '웹 개발의 시작 HTML',
+  '/course/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%B2%AB%EA%B1%B8%EC%9D%8C': '자바스크립트 첫걸음',
+  '/course/React-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'React 첫걸음',
+  '/course/React-%EC%8B%AC%ED%99%94': 'React 심화',
+  '/course/%EC%88%98%EC%9D%B5%ED%98%95-%EC%9B%B9-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9E%85%EB%AC%B8': '수익형 웹 서비스 입문',
+  '/course/Cursor-AI-%ED%92%80%EC%8A%A4%ED%83%9D-%EC%9B%B9-%EA%B0%9C%EB%B0%9C': 'Cursor AI 풀스택 웹 개발',
+  '/course/NodeJS-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'NodeJS 백엔드 첫걸음',
+  '/course/Next.js-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'Next.js 첫걸음',
+  '/course/GIT-GITHUB': 'GIT GITHUB',
+  '/course/%EC%9D%B8%ED%84%B0%EB%84%B7-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8': '인터넷 네트워크 입문'
+};
+function resolveCourseName(url) {
+  if (!url) return null;
+  if (COURSE_MAP[url]) return COURSE_MAP[url];
+  try {
+    for (var key in COURSE_MAP) {
+      var slug = decodeURIComponent(key).replace('/course/', '');
+      if (decodeURIComponent(url).indexOf(slug) !== -1) return COURSE_MAP[key];
+    }
+    var s = url.replace(/^\/offerings\//, '').replace(/^\/products\//, '').replace(/^\/course\//, '');
+    s = s.replace(/-[a-z0-9]{15,}$/i, '');
+    var d = decodeURIComponent(s).replace(/-/g, ' ');
+    if (d && d.length > 2) return d;
+  } catch(e) {}
+  return null;
+}
+
 // ── 분석 ─────────────────────────────────────────────────────
 function analyze(from, to) {
   var allUids  = Object.keys(userMap);
@@ -354,7 +408,7 @@ function analyze(from, to) {
     // 4단계: LDM7 방문 이후 LDM6 방문 (독립)
     for(var i=0;i<evs.length;i++){
       if(evs[i].time<ldm7Time) continue;
-      if(evs[i].url.indexOf('/ldm/6')!==-1){ldm6Visit++;break;}
+      if(evs[i].url.indexOf('/ldm/6')!==-1||evs[i].url.indexOf('올인원-마스터패키지-365')!==-1||evs[i].url.indexOf('%EC%98%AC%EC%9D%B8%EC%9B%90')!==-1){ldm6Visit++;break;}
     }
 
     // 5단계: LDM7 방문 이후 결제 상세 (독립)
@@ -378,10 +432,11 @@ function analyze(from, to) {
         if(np.indexOf('/ldm/7')!==-1)continue;
         if(np.indexOf('/web-view')!==-1)continue;
         var dur=evs[j].time-evs[i].time;
-        ldm7BehMap[np]=(ldm7BehMap[np]||0)+1;
-        if(dur>0&&dur<1800000){ // 30분 이내만 유효
-          ldm7DurMap[np]=(ldm7DurMap[np]||0)+dur;
-          ldm7DurCnt[np]=(ldm7DurCnt[np]||0)+1;
+        var npLabel=resolveCourseName(np)||np;
+        ldm7BehMap[npLabel]=(ldm7BehMap[npLabel]||0)+1;
+        if(dur>0&&dur<1800000){
+          ldm7DurMap[npLabel]=(ldm7DurMap[npLabel]||0)+dur;
+          ldm7DurCnt[npLabel]=(ldm7DurCnt[npLabel]||0)+1;
         }
         break;
       }
@@ -409,7 +464,8 @@ function analyze(from, to) {
       if(pg.indexOf('/web-view')!==-1)ex=true;
       if(pg.indexOf('/oAuth')!==-1)ex=true;
       if(ex)continue;
-      tossPageMap[pg]=(tossPageMap[pg]||0)+1;
+      var pgLabel=resolveCourseName(pg)||pg;
+      tossPageMap[pgLabel]=(tossPageMap[pgLabel]||0)+1;
       // 체류시간: 다음 페이지뷰까지 시간차
       if(j+1<evs.length&&evs[j+1].event==='$mp_web_page_view'){
         var dur=evs[j+1].time-evs[j].time;
