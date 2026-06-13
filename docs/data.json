@@ -1,16 +1,12 @@
 {
   "meta": {
-    "updatedAt": "2026-06-12T03:42:40.175Z",
-    "from": "2026-06-05",
-    "to": "2026-06-11",
+    "updatedAt": "2026-06-13T03:31:36.507Z",
+    "from": "2026-06-06",
+    "to": "2026-06-12",
     "fetchDays": 7
   },
-  "mau": 7353,
+  "mau": 7192,
   "dau": [
-    {
-      "date": "2026-06-05",
-      "count": 1125
-    },
     {
       "date": "2026-06-06",
       "count": 1113
@@ -29,186 +25,190 @@
     },
     {
       "date": "2026-06-10",
-      "count": 1417
+      "count": 1418
     },
     {
       "date": "2026-06-11",
-      "count": 1547
+      "count": 1552
+    },
+    {
+      "date": "2026-06-12",
+      "count": 944
     }
   ],
-  "paidCount": 285,
+  "paidCount": 281,
   "retention": {
-    "d3Rate": 62.5,
-    "d7Rate": 67.5,
-    "base": 40,
+    "d3Rate": 64.1,
+    "d7Rate": 64.1,
+    "base": 39,
     "d3Count": 25,
-    "d7Count": 27
+    "d7Count": 25
   },
   "paidMetrics": {
-    "avgWeeklyVisit": 14.9,
+    "avgWeeklyVisit": 18.9,
     "avgDailyStudyMin": 4.4,
-    "avgDailyCells": 5.9,
-    "badgeRate": 43.9,
-    "badgeUidCount": 125
+    "avgDailyCells": 7.1,
+    "badgeRate": 44.1,
+    "badgeUidCount": 124
   },
   "retentionImprove": {
-    "first3DayRate": 55,
-    "first3DayCount": 22,
-    "deepLearningRate": 60,
-    "deepLearningCount": 171,
-    "quickReturnRate": 84.8,
-    "quickReturnCount": 117,
-    "quickReturnBase": 138
+    "first3DayRate": 53.8,
+    "first3DayCount": 21,
+    "deepLearningRate": 67.3,
+    "deepLearningCount": 189,
+    "quickReturnRate": 85.3,
+    "quickReturnCount": 122,
+    "quickReturnBase": 143
   },
   "topCourses": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 1310
-    },
-    {
-      "course": "파이썬 첫걸음",
-      "count": 1252
+      "count": 1531
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 1235
+      "count": 1470
     },
     {
-      "course": "Claude Code 입문",
-      "count": 993
+      "course": "파이썬 첫걸음",
+      "count": 1265
     },
     {
       "course": "Claude Cowork 활용",
-      "count": 926
+      "count": 1144
+    },
+    {
+      "course": "Claude Code 입문",
+      "count": 1114
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 679
+      "count": 765
     },
     {
-      "course": "AI 프레젠테이션",
-      "count": 494
-    },
-    {
-      "course": "SQL 첫걸음",
-      "count": 398
-    },
-    {
-      "course": "Nano Banana 완전 정복",
-      "count": 394
+      "course": "파이썬 AI 주식 분석",
+      "count": 577
     },
     {
       "course": "Claude MCP 활용",
-      "count": 379
+      "count": 537
+    },
+    {
+      "course": "Nano Banana 완전 정복",
+      "count": 537
+    },
+    {
+      "course": "SQL 첫걸음",
+      "count": 527
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 447
+      "count": 517
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 185
+      "count": 208
     },
     {
       "course": "AI 마케팅",
-      "count": 153
+      "count": 152
     },
     {
       "course": "Nano Banana 완전 정복",
-      "count": 138
+      "count": 142
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 96
+      "count": 92
     },
     {
       "course": "Claude Cowork 활용",
-      "count": 75
-    },
-    {
-      "course": "Claude Code 입문",
-      "count": 33
+      "count": 91
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 33
+      "count": 47
+    },
+    {
+      "course": "Claude Code 입문",
+      "count": 32
     },
     {
       "course": "파이썬 AI 주식 분석",
-      "count": 28
+      "count": 30
     },
     {
-      "course": "파이썬 첫걸음",
-      "count": 27
+      "course": "AI 프레젠테이션",
+      "count": 22
     }
   ],
   "cohort": {
     "trial": {
-      "count": 7,
-      "medianTime": 5093500,
-      "meanTime": 6611750,
-      "couponRate": 85.7,
-      "avgVisits": 490.3
+      "count": 6,
+      "medianTime": 7318000,
+      "meanTime": 7859333,
+      "couponRate": 83.3,
+      "avgVisits": 696.8
     },
     "direct": {
       "count": 33,
       "medianTime": 984500,
-      "meanTime": 7899550,
+      "meanTime": 9268909,
       "couponRate": 84.8,
-      "avgVisits": 198.7
+      "avgVisits": 250.8
     },
-    "trialConversionRate": 3.9,
-    "totalTrialUsers": 179
+    "trialConversionRate": 3.7,
+    "totalTrialUsers": 163
   },
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 3743
+      "count": 3664
     },
     {
       "step": "쿠폰 모달 오픈",
-      "count": 1449
+      "count": 1435
     },
     {
       "step": "마스터패키지(LDM6)",
-      "count": 245
+      "count": 237
     },
     {
       "step": "결제 상세(/payment)",
-      "count": 102
+      "count": 97
     },
     {
       "step": "결제 완료",
-      "count": 40
+      "count": 39
     }
   ],
   "ldm7Behavior": [
     {
       "action": "/products",
-      "count": 496,
-      "avgDuration": 85185
+      "count": 482,
+      "avgDuration": 80876
     },
     {
       "action": "/signin",
       "count": 321,
-      "avgDuration": 67524
+      "avgDuration": 68235
     },
     {
       "action": "/free trial",
-      "count": 200,
-      "avgDuration": 105355
+      "count": 184,
+      "avgDuration": 101829
     },
     {
       "action": "/",
-      "count": 40,
-      "avgDuration": 43290
+      "count": 39,
+      "avgDuration": 40267
     },
     {
       "action": "cmni5q9yw5ilq0711ievrjg5i",
-      "count": 11,
-      "avgDuration": 182000
+      "count": 9,
+      "avgDuration": 136000
     },
     {
       "action": "cmoi13usb7b6v0716rcplk305",
@@ -221,51 +221,51 @@
       "avgDuration": 9333
     },
     {
-      "action": "/reviews",
-      "count": 5,
-      "avgDuration": 180800
+      "action": "cmni5vigy5jcs0711a529rngh",
+      "count": 4,
+      "avgDuration": 86250
     }
   ],
   "tossPages": [
     {
       "page": "올인원 마스터패키지 365",
-      "count": 100,
+      "count": 101,
       "avgDuration": null
     },
     {
       "page": "/products",
-      "count": 62,
-      "avgDuration": 57143
-    },
-    {
-      "page": "/voucher",
-      "count": 29,
-      "avgDuration": 12000
+      "count": 61,
+      "avgDuration": 96875
     },
     {
       "page": "AI코딩밸리 마스터패키지 365",
-      "count": 27,
+      "count": 30,
       "avgDuration": null
     },
     {
-      "page": "/voucher/products/평생교육 올인원 마스터 365",
-      "count": 15,
-      "avgDuration": null
+      "page": "/voucher",
+      "count": 22,
+      "avgDuration": 10500
     },
     {
       "page": "/",
-      "count": 15,
-      "avgDuration": 8000
+      "count": 14,
+      "avgDuration": 4000
     },
     {
-      "page": "/courses",
-      "count": 5,
-      "avgDuration": 11500
-    },
-    {
-      "page": "/free trial",
-      "count": 5,
+      "page": "/voucher/products/평생교육 올인원 마스터 365",
+      "count": 13,
       "avgDuration": null
+    },
+    {
+      "page": "AI 완전정복 패키지 365",
+      "count": 10,
+      "avgDuration": null
+    },
+    {
+      "page": "/welcome",
+      "count": 5,
+      "avgDuration": 12000
     }
   ]
 }
