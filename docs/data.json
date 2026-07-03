@@ -1,11 +1,11 @@
 {
   "meta": {
-    "updatedAt": "2026-07-03T05:32:24.703Z",
+    "updatedAt": "2026-07-03T06:07:52.096Z",
     "from": "2026-06-13",
     "to": "2026-07-02",
     "fetchDays": 20
   },
-  "mau": 19008,
+  "mau": 19007,
   "dau": [
     {
       "date": "2026-06-13",
@@ -85,7 +85,7 @@
     },
     {
       "date": "2026-07-02",
-      "count": 1749
+      "count": 1748
     }
   ],
   "paidCount": 591,
@@ -115,11 +115,11 @@
   "topCourses": [
     {
       "course": "Gemini 완전 정복",
-      "count": 4523
+      "count": 4524
     },
     {
       "course": "AI 업무 꿀팁",
-      "count": 4258
+      "count": 4257
     },
     {
       "course": "Claude Cowork 활용",
@@ -131,7 +131,7 @@
     },
     {
       "course": "파이썬 첫걸음",
-      "count": 2671
+      "count": 2674
     },
     {
       "course": "ChatGPT 완전 정복",
@@ -139,11 +139,11 @@
     },
     {
       "course": "파이썬 핸즈온 초급",
-      "count": 1836
+      "count": 1840
     },
     {
       "course": "파이썬 AI 주식 분석",
-      "count": 1632
+      "count": 1634
     },
     {
       "course": "Claude MCP 활용",
@@ -151,41 +151,41 @@
     },
     {
       "course": "Nano Banana 완전 정복",
-      "count": 1489
+      "count": 1487
     }
   ],
   "courseTrials": [
     {
       "course": "AI 업무 꿀팁",
-      "count": 1466
+      "count": 1462
     },
     {
       "course": "ChatGPT 완전 정복",
-      "count": 701
+      "count": 703
     },
     {
       "course": "Nano Banana 완전 정복",
-      "count": 626
+      "count": 634
     },
     {
       "course": "AI 마케팅",
-      "count": 391
+      "count": 392
     },
     {
       "course": "Gemini 완전 정복",
-      "count": 324
+      "count": 325
     },
     {
       "course": "Claude Cowork 활용",
-      "count": 259
+      "count": 260
     },
     {
       "course": "AI 프레젠테이션",
-      "count": 118
+      "count": 117
     },
     {
       "course": "n8n 업무 자동화 입문",
-      "count": 93
+      "count": 94
     },
     {
       "course": "Claude Code 입문",
@@ -193,7 +193,7 @@
     },
     {
       "course": "수익형 웹 서비스 입문",
-      "count": 64
+      "count": 65
     }
   ],
   "cohort": {
@@ -258,8 +258,8 @@
       "avgDuration": 118359
     },
     {
-      "action": "cmni5q9yw5ilq0711ievrjg5i",
-      "count": 16,
+      "action": "올인원 마스터패키지 365",
+      "count": 17,
       "avgDuration": 163533
     },
     {
@@ -273,9 +273,9 @@
       "avgDuration": 66545
     },
     {
-      "action": "/voucher",
+      "action": "cmni5vigy5jcs0711a529rngh",
       "count": 9,
-      "avgDuration": 202857
+      "avgDuration": 152778
     }
   ],
   "tossPages": [
