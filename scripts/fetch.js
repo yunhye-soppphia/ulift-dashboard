@@ -141,7 +141,8 @@ var COURSE_MAP = {
   '/course/NodeJS-%EB%B0%B1%EC%97%94%EB%93%9C-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'NodeJS 백엔드 첫걸음',
   '/course/Next.js-%EC%B2%AB%EA%B1%B8%EC%9D%8C': 'Next.js 첫걸음',
   '/course/GIT-GITHUB': 'GIT GITHUB',
-  '/course/%EC%9D%B8%ED%84%B0%EB%84%B7-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8': '인터넷 네트워크 입문'
+  '/course/%EC%9D%B8%ED%84%B0%EB%84%B7-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8': '인터넷 네트워크 입문',
+  '/products/cmni5q9yw5ilq0711ievrjg5i': '올인원 마스터패키지 365'
 };
 function resolveCourseName(url) {
   if (!url) return null;
