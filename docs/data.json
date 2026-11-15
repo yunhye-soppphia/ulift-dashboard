@@ -1,16 +1,12 @@
 {
   "meta": {
-    "updatedAt": "2026-11-14T04:54:22.134Z",
-    "from": "2026-10-25",
-    "to": "2026-11-13",
+    "updatedAt": "2026-11-15T04:46:41.218Z",
+    "from": "2026-10-26",
+    "to": "2026-11-14",
     "fetchDays": 20
   },
-  "mau": 2402,
+  "mau": 2407,
   "dau": [
-    {
-      "date": "2026-10-25",
-      "count": 211
-    },
     {
       "date": "2026-10-26",
       "count": 225
@@ -81,119 +77,123 @@
     },
     {
       "date": "2026-11-12",
-      "count": 206
+      "count": 205
     },
     {
       "date": "2026-11-13",
       "count": 194
+    },
+    {
+      "date": "2026-11-14",
+      "count": 175
     }
   ],
-  "paidCount": 317,
+  "paidCount": 318,
   "retention": {
-    "d3Rate": 60,
-    "d7Rate": 60,
-    "base": 15,
-    "d3Count": 9,
-    "d7Count": 9
+    "d3Rate": 57.1,
+    "d7Rate": 57.1,
+    "base": 14,
+    "d3Count": 8,
+    "d7Count": 8
   },
   "paidMetrics": {
-    "avgWeeklyVisit": 9,
-    "avgDailyStudyMin": 3.9,
-    "avgDailyCells": 5.1,
-    "badgeRate": 42.9,
-    "badgeUidCount": 136
+    "avgWeeklyVisit": 7.4,
+    "avgDailyStudyMin": 4,
+    "avgDailyCells": 4.1,
+    "badgeRate": 40.6,
+    "badgeUidCount": 129
   },
   "retentionImprove": {
-    "first3DayRate": 40,
-    "first3DayCount": 6,
-    "deepLearningRate": 64,
-    "deepLearningCount": 203,
-    "quickReturnRate": 75.6,
-    "quickReturnCount": 149,
-    "quickReturnBase": 197
+    "first3DayRate": 35.7,
+    "first3DayCount": 5,
+    "deepLearningRate": 62.6,
+    "deepLearningCount": 199,
+    "quickReturnRate": 75.9,
+    "quickReturnCount": 154,
+    "quickReturnBase": 203
   },
   "topCourses": [
     {
       "course": "파이썬 첫걸음",
-      "count": 2273
+      "count": 1791
     },
     {
       "course": "Claude Code 입문",
-      "count": 1995
+      "count": 1601
     },
     {
       "course": "파이썬 심화",
-      "count": 1903
+      "count": 1586
     },
     {
       "course": "Claude Cowork 활용",
-      "count": 1787
-    },
-    {
-      "course": "파이썬 핸즈온 초급",
-      "count": 1653
+      "count": 1367
     },
     {
       "course": "GPT-6 Astra 입문",
-      "count": 1499
+      "count": 1254
+    },
+    {
+      "course": "파이썬 핸즈온 초급",
+      "count": 1214
     },
     {
       "course": "파이썬 도약",
-      "count": 1461
+      "count": 1204
     },
     {
       "course": "SQL 첫걸음",
-      "count": 1331
+      "count": 1087
+    },
+    {
+      "course": "AI 업무 꿀팁",
+      "count": 1041
     },
     {
       "course": "파이썬 핸즈온 고급",
-      "count": 1287
-    },
-    {
-      "course": "파이썬 GPT 업무 자동화",
-      "count": 1209
+      "count": 1040
     }
   ],
   "courseTrials": [
     {
       "course": "ChatGPT 완전 정복",
-      "count": 60
-    },
-    {
-      "course": "Gemini 완전 정복",
-      "count": 39
+      "count": 42
     },
     {
       "course": "AI 업무 꿀팁",
-      "count": 36
-    },
-    {
-      "course": "Nano Banana 완전 정복",
-      "count": 36
-    },
-    {
-      "course": "Claude Code 핸즈온 1",
-      "count": 34
+      "count": 31
     },
     {
       "course": "Claude Cowork 활용",
-      "count": 34
+      "count": 28
+    },
+    {
+      "course": "Gemini 완전 정복",
+      "count": 27
+    },
+    {
+      "course": "Claude Code 핸즈온 1",
+      "count": 27
+    },
+    {
+      "course": "Nano Banana 완전 정복",
+      "count": 20
     },
     {
       "course": "파이썬 첫걸음",
-      "count": 6
+      "count": 5
     },
     {
       "course": "SQL 첫걸음",
-      "count": 6
+      "count": 5
     },
     {
       "course": "타입스크립트 첫걸음",
-      "count": 6
+      "count": 4
     },
     {
-      "course": "AI 마케팅",
-      "count": 6
+      "course": "AI 프레젠테이션",
+      "count": 3
     }
   ],
   "cohort": {
@@ -202,22 +202,22 @@
       "medianTime": 2065500,
       "meanTime": 2065500,
       "couponRate": 0,
-      "avgVisits": 678
+      "avgVisits": 547
     },
     "direct": {
-      "count": 12,
-      "medianTime": 1127500,
-      "meanTime": 139594900,
-      "couponRate": 16.7,
-      "avgVisits": 473.8
+      "count": 11,
+      "medianTime": 554000,
+      "meanTime": 143286429,
+      "couponRate": 0,
+      "avgVisits": 123.9
     },
-    "trialConversionRate": 10.7,
-    "totalTrialUsers": 28
+    "trialConversionRate": 11.1,
+    "totalTrialUsers": 27
   },
   "funnel": [
     {
       "step": "LDM7 방문",
-      "count": 53
+      "count": 50
     },
     {
       "step": "쿠폰 모달 오픈",
@@ -229,23 +229,23 @@
     },
     {
       "step": "결제 상세(/payment)",
-      "count": 2
+      "count": 1
     },
     {
       "step": "결제 완료",
-      "count": 15
+      "count": 14
     }
   ],
   "ldm7Behavior": [
     {
-      "action": "/",
+      "action": "/products",
       "count": 4,
-      "avgDuration": 14000
+      "avgDuration": 7750
     },
     {
-      "action": "/products",
+      "action": "/",
       "count": 3,
-      "avgDuration": 8667
+      "avgDuration": 14000
     },
     {
       "action": "AI 완전정복 패키지 365",
@@ -261,42 +261,42 @@
   "tossPages": [
     {
       "page": "/voucher",
-      "count": 53,
-      "avgDuration": 112714
+      "count": 42,
+      "avgDuration": 13000
     },
     {
       "page": "/voucher/products/평생교육 스페셜 패키지",
-      "count": 33,
+      "count": 27,
       "avgDuration": null
     },
     {
       "page": "/",
-      "count": 13,
-      "avgDuration": 9800
+      "count": 11,
+      "avgDuration": 8400
+    },
+    {
+      "page": "lesson/lecture/cmk0so1r4aavc081bz7old2ik",
+      "count": 6,
+      "avgDuration": null
     },
     {
       "page": "/first timer",
-      "count": 6,
+      "count": 5,
       "avgDuration": null
     },
     {
       "page": "/welcome",
-      "count": 6,
+      "count": 5,
       "avgDuration": 4000
     },
     {
-      "page": "/free trial",
-      "count": 4,
-      "avgDuration": null
-    },
-    {
-      "page": "lesson/lecture/cmk0so1r4aavc081bz7old2ik",
+      "page": "/signin",
       "count": 3,
-      "avgDuration": null
+      "avgDuration": 22000
     },
     {
-      "page": "/voucher/products/평생교육 올인원 마스터 365",
-      "count": 2,
+      "page": "/free trial",
+      "count": 3,
       "avgDuration": null
     }
   ]
